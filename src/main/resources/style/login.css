@@ -1,0 +1,75 @@
+.login-wrapper {
+    -fx-background-color: #EEEEEE;
+}
+
+/* Sidebar Styles */
+.login-sidebar {
+    -fx-background-color: #D9CE52;
+    -fx-alignment: center;
+    -fx-spacing: 5;
+}
+
+.login-sidebar Text {
+    -fx-font-size: 2em;
+    -fx-fill: #ffffff;
+}
+
+.login-sidebar FontAwesomeIconView {
+    -fx-fill: #ecf39e;
+}
+
+/* Login Form */
+#prompt-label {
+    /*-fx-font-weight: 400;*/
+    -fx-font-size: 1em;
+}
+
+.login-form {
+    /*-fx-spacing: 5;*/
+    /*-fx-alignment: top_left;*/
+}
+
+.login-form Label {
+    -fx-font-size: 1.2em;
+    -fx-font-weight: bold;
+}
+
+.login-form Button {
+    -fx-background-color: #D9CE52;
+    -fx-text-fill: #ffffff;
+    -fx-pref-width: 360;
+    -fx-pref-height: 30;
+    -fx-font-size: 1.2em;
+    -fx-font-weight: bold;
+}
+
+.login-form Button:hover {
+    -fx-cursor: hand;
+}
+
+.input-field {
+    -fx-background-color: #ffffff;
+    -fx-pref-height: 35;
+    -fx-font-size: 1.2em;
+}
+
+.account-type-selector {
+    -fx-background-color: #ecf39e;
+}
+
+.account-type-selector .label {
+    -fx-text-fill: #D9CE52;
+    -fx-font-size: 1.2em;
+}
+
+.account-type-selector-popup-menu {
+    -fx-background-color: #ecf39e;
+}
+
+/*.account-type-selector .arrow {*/
+/*    -fx-background-color: #000;*/
+/*}*/
+
+.error-label {
+    -fx-text-fill: #ff0000;
+}
