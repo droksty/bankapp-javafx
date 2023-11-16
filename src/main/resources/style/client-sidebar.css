@@ -1,0 +1,100 @@
+/*.sidebar-wrapper {*/
+/*    -fx-background-color: #eeeeee;*/
+/*    -fx-alignment: center;*/
+/*    !*-fx-background-color: transparent;*!*/
+/*}*/
+
+.sidebar {
+    -fx-background-color: #ffffff;
+    /*-fx-background-radius: 10;*/
+}
+
+
+/* First VBox */
+.sidebar-top {
+    /*-fx-background-color: #ffffff;*/
+    /*-fx-background-radius: 20 20 0 0;*/
+    -fx-alignment: top-center;
+    -fx-padding: 25;
+    -fx-spacing: 10;
+}
+
+.sidebar-top FontAwesomeIconView {
+    -fx-fill: #D9CE52;
+}
+
+.sidebar-top Text {
+    -fx-fill: #000000;
+    -fx-font-size: 1.2em;
+}
+
+
+/* Second VBox */
+.sidebar-nav {
+    -fx-padding: 10 10 10 10;
+    -fx-spacing: 15;
+    -fx-alignment: center;
+}
+
+.sidebar-nav Button {
+    -fx-pref-width: 140;
+    -fx-pref-height: 40;
+    -fx-background-color: #ffffff;
+    -fx-text-fill: #D9CE52;
+    -fx-font-size: 1.2em;
+    -fx-alignment: center_left;
+    -fx-border-color: #D9CE52;
+    -fx-border-radius: 5;
+    /*-fx-effect: dropshadow(three-pass-box, #dddddd, 5, 0, 0, 6);*/
+}
+
+.sidebar-nav Button:hover {
+    -fx-cursor: hand;
+}
+
+.sidebar-nav Button FontAwesomeIconView {
+    -fx-fill: #D9CE52;
+}
+
+.button-alt-style {
+    -fx-background-color: #D9CE52;
+    -fx-text-fill: #ffffff;
+    /*-fx-effect: none;*/
+}
+
+.button-alt-style FontAwesomeIconView {
+    -fx-fill: #ffffff;
+}
+
+/**/
+/*.sidebar-bottom {*/
+/*    -fx-background-color: #eeffee;*/
+/*    -fx-background-radius: 10;*/
+/*    -fx-alignment: center;*/
+/*    -fx-spacing: 10;*/
+/*    -fx-padding: 10 0 10 0;*/
+/*}*/
+
+/*.sidebar-bottom Text {*/
+/*    -fx-font-weight: bold;*/
+/*    -fx-fill: #D9CE52;*/
+/*}*/
+
+/*.sidebar-bottom Label {*/
+/*    -fx-text-alignment: center;*/
+/*    -fx-wrap-text: true;*/
+/*}*/
+
+/*.sidebar-bottom Button {*/
+/*    -fx-pref-width: 80;*/
+/*    -fx-background-color: #D9CE52;*/
+/*    -fx-text-fill: #ffffff;*/
+/*}*/
+
+/*.sidebar-bottom Button:hover {*/
+/*    -fx-cursor: hand;*/
+/*}*/
+
+/*.sidebar-bottom Button FontAwesomeIconView {*/
+/*    -fx-fill: #ffffff;*/
+/*}*/
