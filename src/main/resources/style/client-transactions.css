@@ -1,0 +1,19 @@
+.transactions-wrapper {
+    -fx-background-color: #EEEEEE;
+}
+
+.transactions-wrapper Text {
+    -fx-fill: #000000;
+    -fx-font-size: 2.5em;
+    -fx-font-family: Roboto;
+}
+
+.transactions-wrapper .list-view {
+    -fx-background-color: #ffffff;
+    -fx-padding: 10;
+}
+
+.transactions-wrapper .list-cell {
+    -fx-background-color: #EEEEEE;
+    -fx-pref-width: 800;
+}
