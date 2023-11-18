@@ -1,0 +1,43 @@
+.create-client-parent {
+    -fx-background-color: #eeeeee;
+}
+
+.create-client-parent .header {
+    -fx-font-size: 2.5em;
+}
+
+.create-client-parent .field-header {
+    -fx-font-size: 1.1em;
+}
+
+.create-client-parent VBox {
+    /*-fx-border-width: 1 1 1 1;*/
+    /*-fx-border-color: #000000;*/
+    /*-fx-padding: 10;*/
+    /*-fx-spacing: 15;*/
+}
+
+.create-client-parent TextField {
+    -fx-pref-width: 250;
+    -fx-pref-height: 35;
+    -fx-background-color: #ffffff;
+    -fx-font-size: 1.4em;
+}
+
+.create-client-parent Button {
+    -fx-background-color: linear-gradient(to right, #D9CE52, #000000);
+    -fx-effect: dropshadow(three-pass-box, #aaaaaa, 3,0,0,3);
+    -fx-pref-width: 250;
+    -fx-font-size: 1.5em;
+    -fx-font-family: Roboto;
+    -fx-text-fill: #ffffff;
+}
+
+.create-client-parent Button:hover {
+    -fx-cursor: hand;
+}
+
+.error-label {
+    -fx-text-fill: #ff0000;
+}
+
