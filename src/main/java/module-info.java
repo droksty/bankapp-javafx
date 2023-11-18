@@ -7,6 +7,7 @@ module io.droksty.bankappfx {
 
 
     opens io.droksty.bankappfx to javafx.fxml;
+    opens io.droksty.bankappfx.controller to javafx.fxml; // a comment
     exports io.droksty.bankappfx;
     exports io.droksty.bankappfx.model;
     exports io.droksty.bankappfx.controller;

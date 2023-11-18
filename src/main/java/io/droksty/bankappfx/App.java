@@ -1,5 +1,6 @@
 package io.droksty.bankappfx;
 
+import io.droksty.bankappfx.view.ViewFactory;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -10,12 +11,7 @@ import java.io.IOException;
 public class App extends Application {
     @Override
     public void start(Stage stage) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxml/login.fxml"));
-        Scene scene = new Scene(fxmlLoader.load());
-        stage.setTitle("BankAppFX");
-        stage.setResizable(false);
-        stage.setScene(scene);
-        stage.show();
+        ViewFactory.showLoginWindow();
     }
 
     public static void main(String[] args) {

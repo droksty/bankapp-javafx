@@ -1,21 +1,34 @@
 package io.droksty.bankappfx.controller;
 
-import javafx.fxml.Initializable;
+import io.droksty.bankappfx.view.ViewFactory;
+import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 
-import java.net.URL;
-import java.util.ResourceBundle;
+public class ClientSidebarController {
+    @FXML
+    private Button dashboardButton;
+    @FXML
+    private Button transactionsButton;
+    @FXML
+    private Button accountButton;
+    @FXML
+    private Button profileButton;
+    @FXML
+    private Button logoutButton;
 
-public class ClientSidebarController implements Initializable {
-    public Button dashboardButton;
-    public Button transactionsButton;
-    public Button accountButton;
-    public Button profileButton;
-    public Button logoutButton;
-    public Button reportButton;
 
-    @Override
-    public void initialize(URL url, ResourceBundle resourceBundle) {
+    @FXML
+    private void onDashboardButtonClick() {
+        ViewFactory.getUserSelectionProperty().set("Dashboard");
+    }
 
+    @FXML
+    private void onTransactionsButtonClick() {
+        ViewFactory.getUserSelectionProperty().set("Transactions");
+    }
+
+    @FXML
+    private void onAccountButtonClick() {
+        ViewFactory.getUserSelectionProperty().set("Accounts");
     }
 }
