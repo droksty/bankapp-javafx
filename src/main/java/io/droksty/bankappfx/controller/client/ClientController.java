@@ -6,15 +6,15 @@ import javafx.scene.layout.BorderPane;
 
 public class ClientController {
     @FXML
-    private BorderPane clientParentNode;
+    private BorderPane clientRoot;
 
     @FXML
     private void initialize() {
         ViewFactory.getUserSelectionProperty().addListener((observable, oldValue, newValue) -> {
             switch (newValue) {
-                case "Transactions" -> clientParentNode.setCenter(ViewFactory.getTransactions());
-                case "Accounts" -> clientParentNode.setCenter(ViewFactory.getAccounts());
-                default -> clientParentNode.setCenter(ViewFactory.getDashboard());
+                case DASHBOARD -> clientRoot.setCenter(ViewFactory.getDashboardPane());
+                case TRANSACTIONS -> clientRoot.setCenter(ViewFactory.getTransactionsPane());
+                case ACCOUNTS -> clientRoot.setCenter(ViewFactory.getAccountsPane());
             }
         });
     }

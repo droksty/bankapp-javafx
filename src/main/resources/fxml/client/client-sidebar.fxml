@@ -31,7 +31,7 @@
                <Insets />
             </VBox.margin>
          </Button>
-         <Button fx:id="accountButton" mnemonicParsing="false" onAction="#onAccountButtonClick" text="Accounts">
+         <Button fx:id="accountsButton" mnemonicParsing="false" onAction="#onAccountButtonClick" text="Accounts">
             <graphic>
                <FontAwesomeIconView glyphName="ADDRESS_BOOK_ALT" size="20" />
             </graphic>
