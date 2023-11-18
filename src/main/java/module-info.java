@@ -12,4 +12,6 @@ module io.droksty.bankappfx {
     exports io.droksty.bankappfx.model;
     exports io.droksty.bankappfx.controller;
     exports io.droksty.bankappfx.view;
+    exports io.droksty.bankappfx.controller.client;
+    opens io.droksty.bankappfx.controller.client to javafx.fxml;
 }

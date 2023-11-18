@@ -1,4 +1,4 @@
-package io.droksty.bankappfx.controller;
+package io.droksty.bankappfx.controller.client;
 
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;

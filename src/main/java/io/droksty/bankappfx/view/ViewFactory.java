@@ -1,6 +1,6 @@
 package io.droksty.bankappfx.view;
 
-import io.droksty.bankappfx.controller.ClientController;
+import io.droksty.bankappfx.controller.client.ClientController;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javafx.fxml.FXMLLoader;
@@ -30,7 +30,7 @@ public final class ViewFactory {
     public static AnchorPane getDashboard () {
         if (dashboard == null) {
             try {
-                dashboard = new FXMLLoader(ViewFactory.class.getResource("/fxml/client-dashboard.fxml")).load();
+                dashboard = new FXMLLoader(ViewFactory.class.getResource("/fxml/client/client-dashboard.fxml")).load();
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -41,7 +41,7 @@ public final class ViewFactory {
     public static AnchorPane getTransactions() {
         if (transactions == null) {
             try {
-                transactions = new FXMLLoader(ViewFactory.class.getResource("/fxml/client-transactions.fxml")).load();
+                transactions = new FXMLLoader(ViewFactory.class.getResource("/fxml/client/client-transactions.fxml")).load();
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -52,7 +52,7 @@ public final class ViewFactory {
     public static AnchorPane getAccounts() {
         if (accounts == null) {
             try {
-                accounts = new FXMLLoader(ViewFactory.class.getResource("/fxml/client-accounts.fxml")).load();
+                accounts = new FXMLLoader(ViewFactory.class.getResource("/fxml/client/client-accounts.fxml")).load();
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -66,7 +66,7 @@ public final class ViewFactory {
     }
 
     public static void showClientWindow() {
-        FXMLLoader loader = new FXMLLoader(ViewFactory.class.getResource("/fxml/client.fxml"));
+        FXMLLoader loader = new FXMLLoader(ViewFactory.class.getResource("/fxml/client/client.fxml"));
         ClientController clientController = new ClientController();
         loader.setController(clientController);
         createStage(loader);

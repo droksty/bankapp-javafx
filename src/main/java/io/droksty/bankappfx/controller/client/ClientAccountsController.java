@@ -1,4 +1,4 @@
-package io.droksty.bankappfx.controller;
+package io.droksty.bankappfx.controller.client;
 
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
