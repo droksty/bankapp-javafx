@@ -1,0 +1,49 @@
+.accounts-view-container {
+    -fx-background-color: #eeeeee;
+}
+
+.accounts-view-container Text {
+    -fx-fill: #888888;
+    -fx-font-size: 1.4em;
+    -fx-font-family: Roboto;
+}
+
+.accounts-view-container VBox {
+
+    -fx-padding: 10;
+    -fx-spacing: 10;
+}
+
+.account-details {
+    -fx-border-width: 0 0 0 1;
+    -fx-border-color: #888888;
+}
+
+.accounts-view-container VBox Text {
+    -fx-font-size: 1.2em;
+}
+
+.accounts-view-container VBox Label {
+    -fx-font-size: 1.2em;
+    -fx-font-weight: bold;
+}
+
+.accounts-view-container TextField {
+    -fx-pref-width: 230;
+    -fx-pref-height: 35;
+    -fx-border-color: #ffffff;
+    -fx-effect: dropshadow(three-pass-box, #aaaaaa, 3, 0, 0, 3);
+}
+
+.accounts-view-container Button {
+    -fx-background-color: linear-gradient(to right, #253f25, #D9CE52);
+    -fx-effect: dropshadow(three-pass-box, #aaaaaa, 3, 0, 0, 3);
+    -fx-pref-width: 230;
+    -fx-font-size: 1.5em;
+    -fx-font-family: Roboto;
+    -fx-text-fill: #ffffff;
+}
+
+.accounts-view-container Button {
+    -fx-cursor: hand;
+}
