@@ -19,4 +19,9 @@ public class AdminSidebarController {
     private void onCreateNewClientButtonClick() {
         ViewFactory.getAdminSelectionProperty().set(AdminSidebarOptions.CREATE_CLIENT);
     }
+
+    @FXML
+    private void onClientListButtonClick() {
+        ViewFactory.getAdminSelectionProperty().set(AdminSidebarOptions.CLIENT_LIST);
+    }
 }

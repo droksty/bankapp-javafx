@@ -70,12 +70,23 @@ public final class ViewFactory {
     public static AnchorPane getCreateClientPane() {
         if (createClientPane == null) {
             try {
-                createClientPane = new FXMLLoader(ViewFactory.class.getResource("/fxml/admin/admint-create-client.fxml")).load();
+                createClientPane = new FXMLLoader(ViewFactory.class.getResource("/fxml/admin/admin-create-client.fxml")).load();
             } catch (IOException e) {
                 e.printStackTrace();
             }
         }
         return createClientPane;
+    }
+
+    public static AnchorPane getClientListPane() {
+        if (clientListPane == null) {
+            try {
+                clientListPane = new FXMLLoader(ViewFactory.class.getResource("/fxml/admin/admin-client-list.fxml")).load();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        return clientListPane;
     }
 
     // Public API - Stage Management

@@ -13,7 +13,7 @@ public class AdminController {
         ViewFactory.getAdminSelectionProperty().addListener((observable, oldValue, newValue) -> {
             switch (newValue) {
                 case CREATE_CLIENT -> adminRoot.setCenter(ViewFactory.getCreateClientPane());
-//                case CLIENT_LIST -> adminRoot.setCenter(ViewFactory.getClientListPane());
+                case CLIENT_LIST -> adminRoot.setCenter(ViewFactory.getClientListPane());
 //                case DEPOSIT -> adminRoot.setCenter(ViewFactory.getDepositPane());
             }
         });
