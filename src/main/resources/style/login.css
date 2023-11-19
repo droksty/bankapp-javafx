@@ -1,32 +1,28 @@
-.login-wrapper {
+.login-root {
     -fx-background-color: #EEEEEE;
 }
 
-/* Sidebar Styles */
-.login-sidebar {
+/* Left VBox */
+
+.left-box {
     -fx-background-color: #D9CE52;
     -fx-alignment: center;
     -fx-spacing: 5;
 }
 
-.login-sidebar Text {
+.left-box Text {
     -fx-font-size: 2em;
-    -fx-fill: #ffffff;
+    -fx-fill: #FFFFFF;
 }
 
-.login-sidebar FontAwesomeIconView {
-    -fx-fill: #ecf39e;
+.left-box FontAwesomeIconView {
+    -fx-fill: #ECF39E;
 }
 
 /* Login Form */
-#prompt-label {
-    /*-fx-font-weight: 400;*/
-    -fx-font-size: 1em;
-}
 
 .login-form {
-    /*-fx-spacing: 5;*/
-    /*-fx-alignment: top_left;*/
+    -fx-spacing: 15;
 }
 
 .login-form Label {
@@ -34,42 +30,26 @@
     -fx-font-weight: bold;
 }
 
+.login-form TextField {
+    -fx-background-color: #FFFFFF;
+    -fx-pref-height: 40;
+    -fx-font-size: 1.2em;
+}
+
 .login-form Button {
     -fx-background-color: #D9CE52;
-    -fx-text-fill: #ffffff;
+    -fx-text-fill: #FFFFFF;
     -fx-pref-width: 360;
-    -fx-pref-height: 30;
+    -fx-pref-height: 40;
     -fx-font-size: 1.2em;
     -fx-font-weight: bold;
 }
 
 .login-form Button:hover {
     -fx-cursor: hand;
+    /* do replace with animation, later */
 }
 
-.input-field {
-    -fx-background-color: #ffffff;
-    -fx-pref-height: 35;
-    -fx-font-size: 1.2em;
-}
-
-.account-type-selector {
-    -fx-background-color: #ecf39e;
-}
-
-.account-type-selector .label {
-    -fx-text-fill: #D9CE52;
-    -fx-font-size: 1.2em;
-}
-
-.account-type-selector-popup-menu {
-    -fx-background-color: #ecf39e;
-}
-
-/*.account-type-selector .arrow {*/
-/*    -fx-background-color: #000;*/
-/*}*/
-
-.error-label {
+.error-message {
     -fx-text-fill: #ff0000;
 }

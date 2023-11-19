@@ -2,18 +2,12 @@ package io.droksty.bankappfx.controller;
 
 import io.droksty.bankappfx.view.ViewFactory;
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
-import javafx.scene.control.ChoiceBox;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 
-import java.net.URL;
-import java.util.ResourceBundle;
 
 public class LoginController {
     @FXML
-    private ChoiceBox accountSelector;
+    private RadioButton adminLogin;
     @FXML
     private Label usernameLabel;
     @FXML
@@ -27,6 +21,12 @@ public class LoginController {
 
     @FXML
     private void initialize() {
-        loginButton.setOnAction(event -> ViewFactory.showClientWindow());
+        loginButton.setOnAction(event -> {
+            if (adminLogin.selectedProperty().get()) {
+                ViewFactory.showAdminWindow();
+            } else {
+                ViewFactory.showClientWindow();
+            }
+        });
     }
 }
