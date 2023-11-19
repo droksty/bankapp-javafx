@@ -37,7 +37,7 @@
     -fx-cursor: hand;
 }
 
-.error-label {
+.error-message {
     -fx-text-fill: #ff0000;
 }
 

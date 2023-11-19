@@ -1,10 +1,11 @@
 package io.droksty.bankappfx.controller.admin;
 
+import io.droksty.bankappfx.view.AdminSidebarOptions;
 import io.droksty.bankappfx.view.ViewFactory;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 
-public class AdminMenuController {
+public class AdminSidebarController {
     @FXML
     private Button createNewClientButton;
     @FXML
@@ -16,6 +17,6 @@ public class AdminMenuController {
 
     @FXML
     private void onCreateNewClientButtonClick() {
-        ViewFactory.getAdminSelectionProperty().set("Create");
+        ViewFactory.getAdminSelectionProperty().set(AdminSidebarOptions.CREATE_CLIENT);
     }
 }

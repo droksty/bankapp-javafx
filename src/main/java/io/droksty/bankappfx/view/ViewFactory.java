@@ -3,8 +3,6 @@ package io.droksty.bankappfx.view;
 import io.droksty.bankappfx.controller.client.ClientController;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
-import javafx.beans.property.SimpleStringProperty;
-import javafx.beans.property.StringProperty;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
@@ -20,8 +18,10 @@ public final class ViewFactory {
     private static final ObjectProperty<ClientSidebarOptions> USER_SELECTION = new SimpleObjectProperty<>();
 
     // Admin View
-    private static AnchorPane createClient;
-    private static final StringProperty adminSelection = new SimpleStringProperty("");
+    private static AnchorPane createClientPane;
+    private static AnchorPane clientListPane;
+    private static AnchorPane depositPane;
+    private static final ObjectProperty<AdminSidebarOptions> ADMIN_SELECTION = new SimpleObjectProperty<>();
 
     // Private Constructor - Enforce noninstantiability
     private ViewFactory() {}
@@ -30,7 +30,7 @@ public final class ViewFactory {
     public static ObjectProperty<ClientSidebarOptions> getUserSelectionProperty() {
         return USER_SELECTION;
     }
-    public static StringProperty getAdminSelectionProperty() { return adminSelection; }
+    public static ObjectProperty<AdminSidebarOptions> getAdminSelectionProperty() { return ADMIN_SELECTION; }
 
     // Public API - Client View
     public static AnchorPane getDashboardPane() {
@@ -67,15 +67,15 @@ public final class ViewFactory {
     }
 
     // Public API - Admin View
-    public static AnchorPane getCreateClient() {
-        if (createClient == null) {
+    public static AnchorPane getCreateClientPane() {
+        if (createClientPane == null) {
             try {
-                createClient = new FXMLLoader(ViewFactory.class.getResource("/fxml/admin/admint-create-client.fxml")).load();
+                createClientPane = new FXMLLoader(ViewFactory.class.getResource("/fxml/admin/admint-create-client.fxml")).load();
             } catch (IOException e) {
                 e.printStackTrace();
             }
         }
-        return createClient;
+        return createClientPane;
     }
 
     // Public API - Stage Management
@@ -107,6 +107,7 @@ public final class ViewFactory {
         Stage stage = new Stage();
         stage.setScene(scene);
         stage.setTitle("BankAppFX");
+        stage.setResizable(false);
         stage.show();
     }
 }
