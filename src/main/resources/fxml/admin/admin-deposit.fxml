@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane prefHeight="750.0" prefWidth="850.0" styleClass="wrapper" stylesheets="@../../style/admin-deposit.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="io.droksty.bankappfx.controller.admin.AdminDepositController">
+   <VBox prefHeight="200.0" prefWidth="100.0" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="100.0">
+      <HBox alignment="CENTER" prefHeight="60.0" prefWidth="200.0" styleClass="search-box">
+         <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Search by payee handle:" />
+         <TextField fx:id="payeeHandleField" />
+         <Button fx:id="searchButton" mnemonicParsing="false" text="Search">
+            <graphic>
+               <FontAwesomeIconView glyphName="SEARCH" size="20" />
+            </graphic>
+         </Button>
+         <padding>
+            <Insets bottom="15.0" top="15.0" />
+         </padding>
+      </HBox>
+      <ListView fx:id="resultListView" prefHeight="200.0" prefWidth="200.0" />
+      <VBox alignment="TOP_CENTER" fillWidth="false" prefHeight="370.0" prefWidth="100.0" styleClass="deposit-box">
+         <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Amount to Deposit">
+            <VBox.margin>
+               <Insets top="50.0" />
+            </VBox.margin></Text>
+         <TextField fx:id="amountField" />
+         <Button fx:id="depositButton" mnemonicParsing="false" text="Deposit">
+            <graphic>
+               <FontAwesomeIconView glyphName="MONEY" size="22" />
+            </graphic>
+         </Button>
+      </VBox>
+   </VBox>
+</AnchorPane>
