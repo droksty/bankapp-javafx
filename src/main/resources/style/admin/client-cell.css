@@ -1,0 +1,36 @@
+.wrapper {
+}
+
+.wrapper HBox {
+    -fx-spacing: 20;
+    -fx-alignment: Center_Left;
+}
+
+.wrapper HBox Label {
+    -fx-text-fill: #444;
+    -fx-font-family: "Roboto Light";
+    -fx-font-size: 1.4em;
+}
+
+.account-label {
+    -fx-font-family: "Roboto Light";
+    -fx-font-weight: bold;
+    -fx-font-size: 1.1em;
+}
+
+.delete-button {
+    -fx-text-fill: #FFF;
+    -fx-background-color: #FF0000;
+    -fx-fill: #FFF
+
+}
+
+.update-button {
+    -fx-text-fill: #FFF;
+    -fx-background-color: #FFA500;
+    -fx-fill: #FFF
+}
+
+Button:hover {
+    -fx-cursor: hand;
+}
