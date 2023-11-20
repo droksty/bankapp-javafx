@@ -24,7 +24,7 @@
                <FontAwesomeIconView glyphName="LIST" size="20" />
             </graphic>
          </Button>
-         <Button fx:id="depositButton" mnemonicParsing="false" text="Deposit">
+         <Button fx:id="depositButton" onAction="#onDepositButtonClick" mnemonicParsing="false" text="Deposit">
             <graphic>
                <FontAwesomeIconView glyphName="MONEY" size="20" />
             </graphic>

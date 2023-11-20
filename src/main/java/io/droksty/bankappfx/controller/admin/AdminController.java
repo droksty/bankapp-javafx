@@ -14,7 +14,7 @@ public class AdminController {
             switch (newValue) {
                 case CREATE_CLIENT -> adminRoot.setCenter(ViewFactory.getCreateClientPane());
                 case CLIENT_LIST -> adminRoot.setCenter(ViewFactory.getClientListPane());
-//                case DEPOSIT -> adminRoot.setCenter(ViewFactory.getDepositPane());
+                case DEPOSIT -> adminRoot.setCenter(ViewFactory.getDepositPane());
             }
         });
     }

@@ -24,4 +24,9 @@ public class AdminSidebarController {
     private void onClientListButtonClick() {
         ViewFactory.getAdminSelectionProperty().set(AdminSidebarOptions.CLIENT_LIST);
     }
+
+    @FXML
+    private void onDepositButtonClick() {
+        ViewFactory.getAdminSelectionProperty().set(AdminSidebarOptions.DEPOSIT);
+    }
 }

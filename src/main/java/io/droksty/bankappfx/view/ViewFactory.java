@@ -89,6 +89,17 @@ public final class ViewFactory {
         return clientListPane;
     }
 
+    public static AnchorPane getDepositPane() {
+        if (depositPane == null) {
+            try {
+                depositPane = new FXMLLoader(ViewFactory.class.getResource("/fxml/admin/admin-deposit.fxml")).load();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        return depositPane;
+    }
+
     // Public API - Stage Management
     public static void showLoginWindow() {
         FXMLLoader loader = new FXMLLoader(ViewFactory.class.getResource("/fxml/login.fxml"));
