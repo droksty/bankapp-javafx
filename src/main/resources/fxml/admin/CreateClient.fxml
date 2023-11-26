@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="750.0" prefWidth="850.0" styleClass="create-client-parent" stylesheets="@../../style/admin/admin-create-client.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="io.droksty.bankappfx.controller.admin.AdminCreateClientController">
+<AnchorPane prefHeight="750.0" prefWidth="850.0" styleClass="create-client-parent" stylesheets="@../../style/admin/admin-create-client.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="io.droksty.bankappfx.controller.admin.CreateClientController">
    <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="header" text="Create new Client" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="20.0" />
    <VBox fillWidth="false" prefHeight="700.0" prefWidth="600.0" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="80.0">
       <padding>

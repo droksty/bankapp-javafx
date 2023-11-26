@@ -7,9 +7,9 @@
             fx:controller="io.droksty.bankappfx.controller.admin.AdminController"
 >
     <left>
-        <fx:include source="admin-sidebar.fxml"/>
+        <fx:include source="AdminMenu.fxml"/>
     </left>
     <center>
-        <fx:include source="admin-create-client.fxml"/>
+        <fx:include source="CreateClient.fxml"/>
     </center>
 </BorderPane>

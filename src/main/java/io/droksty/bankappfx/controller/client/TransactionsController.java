@@ -6,7 +6,7 @@ import javafx.scene.control.ListView;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class ClientTransactionsController implements Initializable {
+public class TransactionsController implements Initializable {
     public ListView transactionsListView;
 
     @Override

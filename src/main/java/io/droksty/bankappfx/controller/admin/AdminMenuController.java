@@ -5,7 +5,7 @@ import io.droksty.bankappfx.view.ViewFactory;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 
-public class AdminSidebarController {
+public class AdminMenuController {
     @FXML
     private Button createNewClientButton;
     @FXML

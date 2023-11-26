@@ -4,7 +4,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="750.0" prefWidth="850.0" styleClass="transactions-wrapper" stylesheets="@../../style/client/client-transactions.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="io.droksty.bankappfx.controller.client.ClientTransactionsController">
+<AnchorPane prefHeight="750.0" prefWidth="850.0" styleClass="transactions-wrapper" stylesheets="@../../style/client/client-transactions.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="io.droksty.bankappfx.controller.client.TransactionsController">
    <Text layoutX="343.0" layoutY="46.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Transactions" AnchorPane.topAnchor="13.626953125" />
    <ListView fx:id="transactionsListView" layoutX="14.0" layoutY="63.0" prefHeight="640.0" prefWidth="830.0" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="100.0" />
 </AnchorPane>

@@ -5,7 +5,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 
-public class AdminDepositController {
+public class DepositController {
     @FXML
     private TextField payeeHandleField;
     @FXML

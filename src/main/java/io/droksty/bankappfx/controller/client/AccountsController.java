@@ -4,7 +4,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 
-public class ClientAccountsController {
+public class AccountsController {
     public Label checkingAccNumber;
     public Label checkingAccLimit;
     public Label checkingAccCreationDate;

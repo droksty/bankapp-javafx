@@ -7,7 +7,7 @@ import javafx.scene.text.Text;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class ClientDashboardController implements Initializable {
+public class DashboardController implements Initializable {
     public Text userGreetingText;
     public Label dateLabel;
     public Label checkingAccountBalance;
