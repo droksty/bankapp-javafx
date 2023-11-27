@@ -1,5 +1,6 @@
 package io.droksty.bankappfx.controller;
 
+import io.droksty.bankappfx.model.Model;
 import io.droksty.bankappfx.view.ViewFactory;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
@@ -21,12 +22,35 @@ public class LoginController {
 
     @FXML
     private void initialize() {
-        loginButton.setOnAction(event -> {
-            if (adminLogin.selectedProperty().get()) {
+        adminLogin.selectedProperty().addListener(observable -> changeLabel());
+        loginButton.setOnAction(event -> login());
+    }
+
+    private void login() {
+        if (adminLogin.selectedProperty().get()) {
+            if (Model.getInstance().isAdminLoginAuthorised(usernameField.getText(), passwordField.getText())) {
                 ViewFactory.showAdminWindow();
+                // Close Login Stage?
             } else {
-                ViewFactory.showClientWindow();
+                passwordField.setText("");
+                errorLabel.setText("Wrong Credentials");
             }
-        });
+        } else {
+            if (Model.getInstance().isClientLoginAuthorised(usernameField.getText(), passwordField.getText())) {
+                ViewFactory.showClientWindow();
+                // Close Login Stage?
+            } else {
+                passwordField.setText("");
+                errorLabel.setText("Wrong Credentials");
+            }
+        }
+    }
+
+    private void changeLabel() {
+        if (adminLogin.selectedProperty().get()) {
+            usernameLabel.setText("Username");
+        } else {
+            usernameLabel.setText("User Handle");
+        }
     }
 }

@@ -19,10 +19,13 @@
    <VBox alignment="CENTER_LEFT" layoutX="340.0" layoutY="100.0" prefHeight="300.0" prefWidth="360.0" styleClass="login-form" AnchorPane.bottomAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="20.0">
       <VBox>
          <children>
-            <HBox alignment="BASELINE_LEFT" spacing="220.0">
+            <HBox alignment="BASELINE_LEFT">
                <children>
-                  <Label fx:id="usernameLabel" text="Handle" />
-                  <RadioButton fx:id="adminLogin" focusTraversable="false" mnemonicParsing="false" styleClass="admin-login-button" text="Admin Login" />
+                  <Label fx:id="usernameLabel" prefWidth="110.0" text="Handle" />
+                  <RadioButton fx:id="adminLogin" focusTraversable="false" mnemonicParsing="false" styleClass="admin-login-button" text="Admin Login">
+                     <HBox.margin>
+                        <Insets left="150.0" />
+                     </HBox.margin></RadioButton>
                </children>
             </HBox>
             <TextField fx:id="usernameField" styleClass="input-field" />
