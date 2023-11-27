@@ -4,6 +4,7 @@ import io.droksty.bankappfx.view.ClientSidebarOptions;
 import io.droksty.bankappfx.view.ViewFactory;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.stage.Stage;
 
 public class ClientMenuController {
     @FXML
@@ -17,6 +18,10 @@ public class ClientMenuController {
     @FXML
     private Button logoutButton;
 
+    @FXML
+    private void initialize() {
+        logoutButton.setOnAction(event -> onLogout());
+    }
 
     @FXML
     private void onDashboardButtonClick() {
@@ -31,5 +36,10 @@ public class ClientMenuController {
     @FXML
     private void onAccountButtonClick() {
         ViewFactory.getUserSelectionProperty().set(ClientSidebarOptions.ACCOUNTS);
+    }
+
+    private void onLogout() {
+        ViewFactory.showLoginWindow();
+        ViewFactory.closeStage((Stage) dashboardButton.getScene().getWindow());
     }
 }

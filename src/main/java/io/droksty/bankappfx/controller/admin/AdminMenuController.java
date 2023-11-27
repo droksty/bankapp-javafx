@@ -4,6 +4,7 @@ import io.droksty.bankappfx.view.AdminSidebarOptions;
 import io.droksty.bankappfx.view.ViewFactory;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.stage.Stage;
 
 public class AdminMenuController {
     @FXML
@@ -14,6 +15,11 @@ public class AdminMenuController {
     private Button depositButton;
     @FXML
     private Button logoutButton;
+
+    @FXML
+    private void initialize() {
+        logoutButton.setOnAction(event -> onLogout());
+    }
 
     @FXML
     private void onCreateNewClientButtonClick() {
@@ -28,5 +34,10 @@ public class AdminMenuController {
     @FXML
     private void onDepositButtonClick() {
         ViewFactory.getAdminSelectionProperty().set(AdminSidebarOptions.DEPOSIT);
+    }
+
+    private void onLogout() {
+        ViewFactory.showLoginWindow();
+        ViewFactory.closeStage((Stage) depositButton.getScene().getWindow());
     }
 }
