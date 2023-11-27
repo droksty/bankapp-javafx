@@ -9,7 +9,7 @@
 <AnchorPane prefHeight="60.0" prefWidth="550.0" styleClass="wrapper"
             stylesheets="@../../style/client/transaction-cell.css" xmlns="http://javafx.com/javafx/21"
             xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="io.droksty.bankappfx.controller.client.TransactionCellController">
+>
    <StackPane layoutX="10.399999618530273" layoutY="-5.485713958740234" styleClass="icons-pane"
               AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="5.0">
       <FontAwesomeIconView fx:id="incomingIcon" glyphName="LONG_ARROW_LEFT" size="20"/>

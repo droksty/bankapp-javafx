@@ -9,7 +9,7 @@
 
 <AnchorPane prefHeight="50.0" prefWidth="750.0" styleClass="wrapper" stylesheets="@../../style/admin/client-cell.css"
             xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="io.droksty.bankappfx.controller.admin.ClientCellController">
+>
    <HBox prefHeight="50.0" prefWidth="550.0" AnchorPane.leftAnchor="5.0">
       <padding>
          <Insets bottom="5.0" left="5.0" right="5.0" top="5.0"/>

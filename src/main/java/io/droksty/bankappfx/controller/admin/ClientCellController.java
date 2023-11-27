@@ -1,5 +1,6 @@
 package io.droksty.bankappfx.controller.admin;
 
+import io.droksty.bankappfx.model.client.Client;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -21,4 +22,10 @@ public class ClientCellController {
     private Button updateButton;
     @FXML
     private Button deleteButton;
+
+    private final Client client;
+
+    public ClientCellController(Client client) {
+        this.client = client;
+    }
 }
