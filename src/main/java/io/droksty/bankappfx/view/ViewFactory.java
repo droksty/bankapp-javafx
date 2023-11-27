@@ -5,12 +5,15 @@ import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 import java.io.IOException;
 
 public final class ViewFactory {
+    private static final Image icon = new Image(String.valueOf(ViewFactory.class.getResource("/img/icon.png")));
+
     // Client View
     private static AnchorPane dashboardPane;
     private static AnchorPane transactionsPane;
@@ -36,7 +39,7 @@ public final class ViewFactory {
     public static AnchorPane getDashboardPane() {
         if (dashboardPane == null) {
             try {
-                dashboardPane = new FXMLLoader(ViewFactory.class.getResource("/fxml/client/client-dashboard.fxml")).load();
+                dashboardPane = new FXMLLoader(ViewFactory.class.getResource("/fxml/client/Dashboard.fxml")).load();
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -47,7 +50,7 @@ public final class ViewFactory {
     public static AnchorPane getTransactionsPane() {
         if (transactionsPane == null) {
             try {
-                transactionsPane = new FXMLLoader(ViewFactory.class.getResource("/fxml/client/client-transactions.fxml")).load();
+                transactionsPane = new FXMLLoader(ViewFactory.class.getResource("/fxml/client/Transactions.fxml")).load();
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -58,7 +61,7 @@ public final class ViewFactory {
     public static AnchorPane getAccountsPane() {
         if (accountsPane == null) {
             try {
-                accountsPane = new FXMLLoader(ViewFactory.class.getResource("/fxml/client/client-accounts.fxml")).load();
+                accountsPane = new FXMLLoader(ViewFactory.class.getResource("/fxml/client/Accounts.fxml")).load();
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -70,7 +73,7 @@ public final class ViewFactory {
     public static AnchorPane getCreateClientPane() {
         if (createClientPane == null) {
             try {
-                createClientPane = new FXMLLoader(ViewFactory.class.getResource("/fxml/admin/admin-create-client.fxml")).load();
+                createClientPane = new FXMLLoader(ViewFactory.class.getResource("/fxml/admin/CreateClient.fxml")).load();
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -81,7 +84,7 @@ public final class ViewFactory {
     public static AnchorPane getClientListPane() {
         if (clientListPane == null) {
             try {
-                clientListPane = new FXMLLoader(ViewFactory.class.getResource("/fxml/admin/admin-client-list.fxml")).load();
+                clientListPane = new FXMLLoader(ViewFactory.class.getResource("/fxml/admin/ClientList.fxml")).load();
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -92,7 +95,7 @@ public final class ViewFactory {
     public static AnchorPane getDepositPane() {
         if (depositPane == null) {
             try {
-                depositPane = new FXMLLoader(ViewFactory.class.getResource("/fxml/admin/admin-deposit.fxml")).load();
+                depositPane = new FXMLLoader(ViewFactory.class.getResource("/fxml/admin/Deposit.fxml")).load();
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -102,19 +105,19 @@ public final class ViewFactory {
 
     // Public API - Stage Management
     public static void showLoginWindow() {
-        FXMLLoader loader = new FXMLLoader(ViewFactory.class.getResource("/fxml/login.fxml"));
+        FXMLLoader loader = new FXMLLoader(ViewFactory.class.getResource("/fxml/Login.fxml"));
         createStage(loader);
     }
 
     public static void showClientWindow() {
-        FXMLLoader loader = new FXMLLoader(ViewFactory.class.getResource("/fxml/client/client.fxml"));
+        FXMLLoader loader = new FXMLLoader(ViewFactory.class.getResource("/fxml/client/Client.fxml"));
         ClientController clientController = new ClientController();
         loader.setController(clientController);
         createStage(loader);
     }
 
     public static void showAdminWindow() {
-        FXMLLoader loader = new FXMLLoader(ViewFactory.class.getResource("/fxml/admin/admin.fxml"));
+        FXMLLoader loader = new FXMLLoader(ViewFactory.class.getResource("/fxml/admin/Admin.fxml"));
         createStage(loader);
     }
 
@@ -128,6 +131,7 @@ public final class ViewFactory {
         }
         Stage stage = new Stage();
         stage.setScene(scene);
+        stage.getIcons().add(icon);
         stage.setTitle("BankAppFX");
         stage.setResizable(false);
         stage.show();
