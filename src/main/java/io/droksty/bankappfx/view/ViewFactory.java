@@ -121,6 +121,10 @@ public final class ViewFactory {
         createStage(loader);
     }
 
+    public static void closeStage(Stage stage) {
+        stage.close();
+    }
+
     // Helper methods
     private static void createStage(FXMLLoader loader) {
         Scene scene = null;

@@ -4,6 +4,7 @@ import io.droksty.bankappfx.model.Model;
 import io.droksty.bankappfx.view.ViewFactory;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import javafx.stage.Stage;
 
 
 public class LoginController {
@@ -30,7 +31,7 @@ public class LoginController {
         if (adminLogin.selectedProperty().get()) {
             if (Model.getInstance().isAdminLoginAuthorised(usernameField.getText(), passwordField.getText())) {
                 ViewFactory.showAdminWindow();
-                // Close Login Stage?
+                ViewFactory.closeStage((Stage) errorLabel.getScene().getWindow());
             } else {
                 passwordField.setText("");
                 errorLabel.setText("Wrong Credentials");
@@ -38,7 +39,7 @@ public class LoginController {
         } else {
             if (Model.getInstance().isClientLoginAuthorised(usernameField.getText(), passwordField.getText())) {
                 ViewFactory.showClientWindow();
-                // Close Login Stage?
+                ViewFactory.closeStage((Stage) errorLabel.getScene().getWindow());
             } else {
                 passwordField.setText("");
                 errorLabel.setText("Wrong Credentials");
