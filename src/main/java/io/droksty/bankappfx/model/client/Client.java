@@ -1,5 +1,6 @@
-package io.droksty.bankappfx.model;
+package io.droksty.bankappfx.model.client;
 
+import io.droksty.bankappfx.model.account.Account;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;

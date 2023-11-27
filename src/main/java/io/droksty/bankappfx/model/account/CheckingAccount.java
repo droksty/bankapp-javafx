@@ -1,4 +1,4 @@
-package io.droksty.bankappfx.model;
+package io.droksty.bankappfx.model.account;
 
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;

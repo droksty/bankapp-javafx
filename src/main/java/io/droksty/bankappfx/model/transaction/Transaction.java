@@ -1,4 +1,4 @@
-package io.droksty.bankappfx.model;
+package io.droksty.bankappfx.model.transaction;
 
 import javafx.beans.property.*;
 
