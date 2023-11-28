@@ -38,6 +38,8 @@ public class LoginController {
             }
         } else {
             if (Model.getInstance().isClientLoginAuthorised(usernameField.getText(), passwordField.getText())) {
+                System.out.println(usernameField.getText());
+                System.out.println(passwordField.getText());
                 ViewFactory.showClientWindow();
                 ViewFactory.closeStage((Stage) errorLabel.getScene().getWindow());
             } else {

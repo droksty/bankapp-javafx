@@ -15,7 +15,7 @@ public class TransactionCellController {
     @FXML
     private Label senderLabel;
     @FXML
-    private Label payeeLabel;
+    private Label receiverLabel;
     @FXML
     private Label amountLabel;
 
@@ -23,5 +23,13 @@ public class TransactionCellController {
 
     public TransactionCellController(Transaction transaction) {
         this.transaction = transaction;
+    }
+
+    @FXML
+    private void initialize() {
+        senderLabel.textProperty().bind(transaction.senderProperty());
+        receiverLabel.textProperty().bind(transaction.receiverProperty());
+        amountLabel.textProperty().bind(transaction.amountProperty().asString());
+        datetimeLabel.textProperty().bind(transaction.dateProperty().asString());
     }
 }

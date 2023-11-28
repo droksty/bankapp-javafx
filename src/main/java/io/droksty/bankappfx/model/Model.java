@@ -3,6 +3,7 @@ package io.droksty.bankappfx.model;
 import io.droksty.bankappfx.model.account.CheckingAccount;
 import io.droksty.bankappfx.model.account.SavingsAccount;
 import io.droksty.bankappfx.model.client.Client;
+import io.droksty.bankappfx.model.transaction.Transaction;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
@@ -14,11 +15,15 @@ public class Model {
     private static Model model;
     private final DatabaseDriver databaseDriver;
     private final Client client;
+    private final ObservableList<Transaction> latestTransactions;
+    private final ObservableList<Transaction> allTransactions;
     private final ObservableList<Client> clientList;
 
     private Model() {
         this.databaseDriver = new DatabaseDriver();
         this.client = new Client("", "", "", null, null, null);
+        this.latestTransactions = FXCollections.observableArrayList();
+        this.allTransactions = FXCollections.observableArrayList();
         this.clientList = FXCollections.observableArrayList();
     }
 
@@ -37,20 +42,24 @@ public class Model {
     * Client Section
     */
 
+    public Client getClient() {
+        return client;
+    }
+
     public boolean isClientLoginAuthorised(String userHandle, String password) {
         CheckingAccount checkingAccount;
         SavingsAccount savingsAccount;
         ResultSet rs = databaseDriver.getClientData(userHandle, password);
         try {
             if (rs.isBeforeFirst()) {
-                this.client.firstnameProperty().set(rs.getString("Firstname"));
-                this.client.lastnameProperty().set(rs.getString("Lastname"));
-                this.client.userHandleProperty().set(rs.getString("Username"));
-                this.client.dateCreatedProperty().set(getDateFromResultSet(rs.getString("Date")));
+                this.client.firstnameProperty().set(rs.getString("firstname"));
+                this.client.lastnameProperty().set(rs.getString("lastname"));
+                this.client.userHandleProperty().set(rs.getString("user_handle"));
+                this.client.dateCreatedProperty().set(getDateFromResultSet(rs.getString("date")));
                 checkingAccount = getCheckingAccount(userHandle);
                 savingsAccount = getSavingsAccount(userHandle);
                 this.client.checkingAccountProperty().set(checkingAccount);
-                this.client.checkingAccountProperty().set(savingsAccount);
+                this.client.savingsAccountProperty().set(savingsAccount);
                 return true;
             }
         } catch (SQLException e) {
@@ -59,6 +68,40 @@ public class Model {
         return false;
     }
 
+
+    private void prepareTransactions(ObservableList<Transaction> transactions, int limit) {
+        ResultSet resultSet = databaseDriver.getTransactions(this.client.userHandleProperty().get(), limit);
+        if (resultSet == null) return; // What if there is no transaction history Patrick?
+        try {
+            while (resultSet.next()) {
+                String sender = resultSet.getString("sender");
+                String receiver = resultSet.getString("receiver");
+                double amount = resultSet.getDouble("amount");
+                LocalDate date = getDateFromResultSet(resultSet.getString("date"));
+                String message = resultSet.getString("message");
+                transactions.add(new Transaction(sender, receiver, amount, date, message));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+
+    public void setLatestTransactions() {
+        prepareTransactions(this.latestTransactions, 4);
+    }
+
+    public ObservableList<Transaction> getLatestTransactions() {
+        return latestTransactions;
+    }
+
+    public void setAllTransactions() {
+        prepareTransactions(this.allTransactions, -1);
+    }
+
+    public ObservableList<Transaction> getAllTransactions() {
+        return allTransactions;
+    }
 
     /*
     * Admin section

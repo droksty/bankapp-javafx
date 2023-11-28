@@ -29,9 +29,9 @@
             <String fx:value="account" />
             <String fx:value="account-gradient" />
          </styleClass>
-         <Label fx:id="checkingAccountBalance" styleClass="account-balance" text="€ 3,500.00" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="25.0" />
+         <Label fx:id="checkingAccBalance" styleClass="account-balance" text="€ 3,500.00" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="25.0" />
          <Label styleClass="account-number" text="**** **** ****" AnchorPane.bottomAnchor="45.0" AnchorPane.leftAnchor="14.0" />
-         <Label fx:id="checkingAccountDigits" styleClass="account-number" text="4558" AnchorPane.bottomAnchor="47.0" AnchorPane.leftAnchor="138.0" />
+         <Label fx:id="checkingAccDigits" styleClass="account-number" text="4558" AnchorPane.bottomAnchor="47.0" AnchorPane.leftAnchor="138.0" />
          <VBox prefHeight="100.0" prefWidth="35.0" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="14.0" />
          <FontAwesomeIconView glyphName="BANK" size="30" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="7.0" />
          <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Checking Account" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="14.0" />
@@ -41,9 +41,9 @@
             <String fx:value="account" />
             <String fx:value="account-gradient" />
          </styleClass>
-         <Label fx:id="savingsAccountBalance" styleClass="account-balance" text="€ 3,500.00" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="25.0" />
+         <Label fx:id="savingsAccBalance" styleClass="account-balance" text="€ 3,500.00" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="25.0" />
          <Label styleClass="account-number" text="**** **** ****" AnchorPane.bottomAnchor="45.0" AnchorPane.leftAnchor="14.0" />
-         <Label fx:id="savingsAccountDigits" styleClass="account-number" text="4678" AnchorPane.bottomAnchor="47.0" AnchorPane.leftAnchor="138.0" />
+         <Label fx:id="savingsAccDigits" styleClass="account-number" text="4678" AnchorPane.bottomAnchor="47.0" AnchorPane.leftAnchor="138.0" />
          <VBox prefHeight="100.0" prefWidth="35.0" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="14.0" />
          <FontAwesomeIconView glyphName="BANK" size="30" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="7.0" />
          <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Savings Account" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="14.0" />

@@ -30,6 +30,18 @@ public class DatabaseDriver {
         return rs;
     }
 
+    public ResultSet getTransactions(String userHandle, int limit) {
+        Statement statement;
+        ResultSet rs = null;
+        try {
+            statement = this.connection.createStatement();
+            rs = statement.executeQuery("SELECT * FROM transaction WHERE sender='"+userHandle+"' OR receiver='"+userHandle+"' LIMIT "+limit+"");
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return rs;
+    }
+
     /*
     * Admin Section
     * */
