@@ -18,12 +18,12 @@ public class DatabaseDriver {
     /*
     * Client Section
     * */
-    public ResultSet getClientData(String username, String password) {
+    public ResultSet getClientData(String userHandle, String password) {
         Statement statement;
         ResultSet rs = null;
         try {
             statement = this.connection.createStatement();
-            rs = statement.executeQuery("SELECT  * FROM clients WHERE Username='"+username+"' AND Password='"+password+"';");
+            rs = statement.executeQuery("SELECT  * FROM client WHERE user_handle='"+userHandle+"' AND password='"+password+"';");
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -38,7 +38,7 @@ public class DatabaseDriver {
         ResultSet rs = null;
         try {
             statement = this.connection.createStatement();
-            rs = statement.executeQuery("SELECT  * FROM Admins WHERE Username='"+username+"' AND Password='"+password+"';");
+            rs = statement.executeQuery("SELECT  * FROM admin WHERE username='"+username+"' AND password='"+password+"';");
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -51,7 +51,7 @@ public class DatabaseDriver {
         try {
             statement = this.connection.createStatement();
             statement.executeUpdate("INSERT INTO " +
-                    "Clients (Firstname, Lastname, Username, Password, Date) " +
+                    "client (firstname, lastname, user_handle, password, date) " +
                     "VALUES ('"+firstname+"', '"+lastname+"', '"+username+"', '"+password+"', '"+date.toString()+"');", Statement.RETURN_GENERATED_KEYS);
             /*ResultSet set = statement.getGeneratedKeys();
             if (set.isBeforeFirst()) {
@@ -69,7 +69,7 @@ public class DatabaseDriver {
         try {
             statement = this.connection.createStatement();
             statement.executeUpdate("INSERT INTO " +
-                    "CheckingAccounts (Owner, AccountNumber, TransactionLimit, Balance) " +
+                    "checking_account (owner, account_number, transaction_limit, balance) " +
                     "VALUES ('"+owner+"', '"+number+"', '"+transactionLimit+"', '"+balance+"')");
         } catch (SQLException e) {
             e.printStackTrace();
@@ -81,11 +81,23 @@ public class DatabaseDriver {
         try {
             statement = this.connection.createStatement();
             statement.executeUpdate("INSERT INTO " +
-                    "SavingsAccounts (Owner, AccountNumber, WithdrawalLimit, Balance) " +
+                    "savings_account (owner, account_number, withdrawal_limit, balance) " +
                     "VALUES ('"+owner+"', '"+number+"', '"+withdrawalLimit+"', '"+balance+"')");
         } catch (SQLException e) {
             e.printStackTrace();
         }
+    }
+
+    public ResultSet getAllClients() {
+        Statement statement;
+        ResultSet resultSet = null;
+        try {
+            statement = this.connection.createStatement();
+            resultSet = statement.executeQuery("SELECT  * FROM client");
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return resultSet;
     }
 
     /*
@@ -98,11 +110,35 @@ public class DatabaseDriver {
         int id = 0;
         try {
             statement = this.connection.createStatement();
-            resultSet = statement.executeQuery("SELECT * FROM sqlite_sequence WHERE name='Clients';");
+            resultSet = statement.executeQuery("SELECT * FROM sqlite_sequence WHERE name='client';");
             id = resultSet.getInt("seq");
         } catch (SQLException e) {
             e.printStackTrace();
         }
         return id;
+    }
+
+    public ResultSet getCheckingAccountData(String usernameHandle) {
+        Statement statement;
+        ResultSet resultSet = null;
+        try {
+            statement = this.connection.createStatement();
+            resultSet = statement.executeQuery("SELECT * FROM checking_account WHERE owner='"+usernameHandle+"';");
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return resultSet;
+    }
+
+    public ResultSet getSavingsAccountData(String usernameHandle) {
+        Statement statement;
+        ResultSet resultSet = null;
+        try {
+            statement = this.connection.createStatement();
+            resultSet = statement.executeQuery("SELECT * FROM savings_account WHERE owner='"+usernameHandle+"';");
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return resultSet;
     }
 }

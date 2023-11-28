@@ -28,4 +28,14 @@ public class ClientCellController {
     public ClientCellController(Client client) {
         this.client = client;
     }
+
+    @FXML
+    private void initialize() {
+        firstnameLabel.textProperty().bind(client.firstnameProperty());
+        lastnameLabel.textProperty().bind(client.lastnameProperty());
+        userHandleLabel.textProperty().bind(client.userHandleProperty());
+        checkingAccNumLabel.textProperty().bind(client.checkingAccountProperty().asString());
+        savingsAccNumLabel.textProperty().bind(client.savingsAccountProperty().asString());
+        dateLabel.textProperty().bind(client.dateCreatedProperty().asString());
+    }
 }
