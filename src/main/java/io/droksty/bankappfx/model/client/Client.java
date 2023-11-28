@@ -11,15 +11,15 @@ import java.time.LocalDate;
 public class Client {
     private final StringProperty firstname;
     private final StringProperty lastname;
-    private final StringProperty username;
+    private final StringProperty userHandle;
     private final ObjectProperty<Account> checkingAccount;
     private final ObjectProperty<Account> savingsAccount;
     private final ObjectProperty<LocalDate> dateCreated;
 
-    public Client(String firstname, String lastname, String username, Account checkingAccount, Account savingsAccount, LocalDate dateCreated) {
+    public Client(String firstname, String lastname, String userHandle, Account checkingAccount, Account savingsAccount, LocalDate dateCreated) {
         this.firstname = new SimpleStringProperty(this, "Firstname", firstname);
         this.lastname = new SimpleStringProperty(this, "Lastname", lastname);
-        this.username = new SimpleStringProperty(this, "Username", username);
+        this.userHandle = new SimpleStringProperty(this, "User Handle", userHandle);
         this.checkingAccount = new SimpleObjectProperty<>(this, "Checking Account", checkingAccount);
         this.savingsAccount = new SimpleObjectProperty<>(this, "Savings Account", savingsAccount);
         this.dateCreated = new SimpleObjectProperty<>(this, "Date Created", dateCreated);
@@ -31,8 +31,8 @@ public class Client {
     public StringProperty lastnameProperty() {
         return lastname;
     }
-    public StringProperty usernameProperty() {
-        return username;
+    public StringProperty userHandleProperty() {
+        return userHandle;
     }
     public ObjectProperty<Account> checkingAccountProperty() {
         return checkingAccount;
