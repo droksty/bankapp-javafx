@@ -17,11 +17,15 @@
     /*-fx-spacing: 15;*/
 }
 
-.create-client-parent TextField {
+.create-client-parent TextField, Label {
     -fx-pref-width: 250;
     -fx-pref-height: 35;
     -fx-background-color: #ffffff;
     -fx-font-size: 1.4em;
+}
+
+Label {
+    -fx-background-color: #aaaaaa;
 }
 
 .create-client-parent Button {

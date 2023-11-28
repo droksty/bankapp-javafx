@@ -23,6 +23,9 @@ public class Model {
         return model;
     }
 
+    public DatabaseDriver getDatabaseDriver() {
+        return databaseDriver;
+    }
 
     /*
     * Client Section

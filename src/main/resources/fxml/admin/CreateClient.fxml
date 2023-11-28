@@ -2,13 +2,14 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="750.0" prefWidth="850.0" styleClass="create-client-parent" stylesheets="@../../style/admin/admin-create-client.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="io.droksty.bankappfx.controller.admin.CreateClientController">
+<AnchorPane prefHeight="750.0" prefWidth="850.0" styleClass="create-client-parent" stylesheets="@../../style/admin/CreateClient.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="io.droksty.bankappfx.controller.admin.CreateClientController">
    <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="header" text="Create new Client" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="20.0" />
    <VBox fillWidth="false" prefHeight="700.0" prefWidth="600.0" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="80.0">
       <padding>
@@ -34,16 +35,16 @@
             <Insets bottom="20.0" />
          </VBox.margin>
       </TextField>
-      <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="field-header" text="Username">
+      <CheckBox fx:id="generateUserHandleCheckBox" styleClass="field-header" text="Generate User Handle">
          <VBox.margin>
             <Insets bottom="5.0" />
          </VBox.margin>
-      </Text>
-      <TextField fx:id="usernameField">
+      </CheckBox>
+      <Label fx:id="userHandleLabel">
          <VBox.margin>
             <Insets bottom="20.0" />
          </VBox.margin>
-      </TextField>
+      </Label>
       <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="field-header" text="Password">
          <VBox.margin>
             <Insets bottom="5.0" />
@@ -69,7 +70,7 @@
             <Insets bottom="5.0" />
          </VBox.margin>
       </Text>
-      <TextField>
+      <TextField fx:id="savingsBalanceField">
          <VBox.margin>
             <Insets bottom="20.0" />
          </VBox.margin>
@@ -79,6 +80,6 @@
             <Insets bottom="20.0" />
          </VBox.margin>
       </Button>
-      <Label fx:id="errorLabel" styleClass="error-message" text="Error Message" />
+      <Label fx:id="messageLabel" styleClass="error-message" text="Error Message" />
    </VBox>
 </AnchorPane>
