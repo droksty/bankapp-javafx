@@ -100,7 +100,23 @@ public class Model {
         }
     }
 
-
+    public ObservableList<Client> searchOne(String userHandle) {
+        ObservableList<Client> searchResult = FXCollections.observableArrayList();
+        ResultSet rs = databaseDriver.getOneClient(userHandle);
+        try {
+            CheckingAccount checkingAccount = getCheckingAccount(userHandle);
+            SavingsAccount savingsAccount = getSavingsAccount(userHandle);
+            String firstname = rs.getString("firstname");
+            String lastname = rs.getString("lastname");
+            System.out.println(rs.getString("lastname"));
+            System.out.println(rs.getString("date"));
+            LocalDate date = getDateFromResultSet(rs.getString("date"));
+            searchResult.add(new Client(firstname, lastname, userHandle, checkingAccount, savingsAccount, date));
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return searchResult;
+    }
 
 
 

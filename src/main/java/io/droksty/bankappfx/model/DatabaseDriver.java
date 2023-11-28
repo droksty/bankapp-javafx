@@ -100,6 +100,28 @@ public class DatabaseDriver {
         return resultSet;
     }
 
+    public ResultSet getOneClient(String userHandle) {
+        Statement statement;
+        ResultSet rs = null;
+        try {
+            statement = this.connection.createStatement();
+            rs = statement.executeQuery("SELECT * FROM client WHERE user_handle='"+userHandle+"'");
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return rs;
+    }
+
+    public void depositSavings(String userHandle, double amount) {
+        Statement statement;
+        try {
+            statement = this.connection.createStatement();
+            statement.executeUpdate("UPDATE savings_account SET balance="+amount+" WHERE owner='"+userHandle+"'");
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
     /*
     * Utility Methods
     * */

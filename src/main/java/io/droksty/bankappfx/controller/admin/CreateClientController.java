@@ -50,13 +50,14 @@ public class CreateClientController {
     }
 
     private void createAccount(String accountType) {
-        double balance = Double.parseDouble(checkingBalanceField.getText());
         String firstSection = "3201";
         String lastSection = Integer.toString((new Random()).nextInt(9999) + 1000);
         String accountNum = firstSection + " " + lastSection;
         if (accountType.equals("checking")) {
+            double balance = Double.parseDouble(checkingBalanceField.getText());
             Model.getInstance().getDatabaseDriver().createCheckingAccount(userHandle, accountNum, 10, balance);
         } else {
+            double balance = Double.parseDouble(savingsBalanceField.getText());
             Model.getInstance().getDatabaseDriver().createSavingsAccount(userHandle, accountNum, 2000, balance);
         }
     }
