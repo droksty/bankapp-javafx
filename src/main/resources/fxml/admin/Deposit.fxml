@@ -14,7 +14,7 @@
    <VBox prefHeight="200.0" prefWidth="100.0" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="100.0">
       <HBox alignment="CENTER" prefHeight="60.0" prefWidth="200.0" styleClass="search-box">
          <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Search by payee handle:" />
-         <TextField fx:id="payeeHandleField" />
+         <TextField fx:id="userHandleField" />
          <Button fx:id="searchButton" mnemonicParsing="false" text="Search">
             <graphic>
                <FontAwesomeIconView glyphName="SEARCH" size="20" />

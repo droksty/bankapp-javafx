@@ -11,7 +11,7 @@ import javafx.scene.control.TextField;
 
 public class DepositController {
     @FXML
-    private TextField payeeHandleField;
+    private TextField userHandleField;
     @FXML
     private Button searchButton;
     @FXML
@@ -25,12 +25,12 @@ public class DepositController {
 
     @FXML
     private void initialize() {
-        searchButton.setOnAction(event -> onClientSearch());
+        searchButton.setOnAction(event -> searchClient());
         depositButton.setOnAction(event -> deposit());
     }
 
-    private void onClientSearch() {
-        ObservableList<Client> searchResult = Model.getInstance().searchOne(payeeHandleField.getText());
+    private void searchClient() {
+        ObservableList<Client> searchResult = Model.getInstance().searchOne(userHandleField.getText());
         resultListView.setItems(searchResult);
         resultListView.setCellFactory(e -> new ClientCellFactory());
         client = searchResult.get(0);
@@ -40,13 +40,13 @@ public class DepositController {
         double amount = Double.parseDouble(amountField.getText());
         double newBalance = amount + client.savingsAccountProperty().get().balanceProperty().get();
         if (amountField.getText() != null) {
-            Model.getInstance().getDatabaseDriver().depositSavings(client.userHandleProperty().get(), newBalance);
+            Model.getInstance().getDatabaseDriver().updateSavingsAccBalance(client.userHandleProperty().get(), newBalance);
         }
         clearFields();
     }
 
     private void clearFields() {
-        payeeHandleField.setText("");
+        userHandleField.setText("");
         amountField.setText("");
     }
 }

@@ -149,24 +149,12 @@ public class DatabaseDriver {
         return clientList;
     }
 
-
-
-
-
-
-
-
-
-
-
-
-
-    
-    public void depositSavings(String userHandle, double amount) {
-        Statement statement;
-        try {
-            statement = this.connection.createStatement();
-            statement.executeUpdate("UPDATE savings_account SET balance="+amount+" WHERE owner='"+userHandle+"'");
+    public void updateSavingsAccBalance(String userHandle, double amount) {
+        String sql = "UPDATE savings_account SET balance=? WHERE owner=?";
+        try (PreparedStatement ps = connection.prepareStatement(sql)) {
+            ps.setDouble(1, amount);
+            ps.setString(2, userHandle);
+            ps.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
         }
