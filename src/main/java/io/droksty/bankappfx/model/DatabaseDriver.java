@@ -131,6 +131,30 @@ public class DatabaseDriver {
         return clientList;
     }
 
+    public List<Client> getOneClient(String userHandle) {
+        List<Client> clientList = new ArrayList<>();
+        String sql = "SELECT * FROM client WHERE user_handle=?";
+        try (PreparedStatement ps = connection.prepareStatement(sql)) {
+            ps.setString(1, userHandle);
+            ResultSet rs = ps.executeQuery();
+            String firstname = rs.getString("firstname");
+            String lastname = rs.getString("lastname");
+            LocalDate date = getDateFromResultSet(rs.getString("date"));
+            Account checkingAccount = getCheckingAccount(userHandle);
+            Account savingsAccount = getSavingsAccount(userHandle);
+            clientList.add(new Client(firstname, lastname, userHandle, checkingAccount, savingsAccount, date));
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return clientList;
+    }
+
+
+
+
+
+
+
 
 
 
@@ -138,22 +162,6 @@ public class DatabaseDriver {
 
 
     
-
-
-
-
-    public ResultSet getOneClient(String userHandle) {
-        Statement statement;
-        ResultSet rs = null;
-        try {
-            statement = this.connection.createStatement();
-            rs = statement.executeQuery("SELECT * FROM client WHERE user_handle='"+userHandle+"'");
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return rs;
-    }
-
     public void depositSavings(String userHandle, double amount) {
         Statement statement;
         try {
