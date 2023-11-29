@@ -10,6 +10,7 @@ import javafx.collections.ObservableList;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDate;
+import java.util.List;
 
 public class Model {
     private static Model model;
@@ -38,6 +39,19 @@ public class Model {
         return databaseDriver;
     }
 
+
+
+
+
+
+
+
+
+
+
+
+
+
     /*
     * Client Section
     */
@@ -56,8 +70,8 @@ public class Model {
                 this.client.lastnameProperty().set(rs.getString("lastname"));
                 this.client.userHandleProperty().set(rs.getString("user_handle"));
                 this.client.dateCreatedProperty().set(getDateFromResultSet(rs.getString("date")));
-                checkingAccount = getCheckingAccount(userHandle);
-                savingsAccount = getSavingsAccount(userHandle);
+                checkingAccount = getCheckingAccountREMOVELATER(userHandle);
+                savingsAccount = getSavingsAccountREMOVELATER(userHandle);
                 this.client.checkingAccountProperty().set(checkingAccount);
                 this.client.savingsAccountProperty().set(savingsAccount);
                 return true;
@@ -103,44 +117,39 @@ public class Model {
         return allTransactions;
     }
 
+
+
+
+
+
+
+
+
+
     /*
     * Admin section
     */
+    /**/
 
     public boolean authenticateAdmin(String username, String password) {
         return databaseDriver.adminExists(username, password);
     }
-
 
     public ObservableList<Client> getClientList() {
         return clientList;
     }
 
     public void setClientList() {
-        CheckingAccount checkingAccount;
-        SavingsAccount savingsAccount;
-        ResultSet rs = databaseDriver.getAllClients();
-        try {
-            while (rs.next()) {
-                String firstname = rs.getString("firstname");
-                String lastname = rs.getString("lastname");
-                String userHandle = rs.getString("user_handle");
-                LocalDate date = getDateFromResultSet(rs.getString("date"));
-                checkingAccount = getCheckingAccount(userHandle);
-                savingsAccount = getSavingsAccount(userHandle);
-                clientList.add(new Client(firstname, lastname, userHandle, checkingAccount, savingsAccount, date));
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+        List<Client> list = databaseDriver.getAllClients();
+        clientList.addAll(list);
     }
 
     public ObservableList<Client> searchOne(String userHandle) {
         ObservableList<Client> searchResult = FXCollections.observableArrayList();
         ResultSet rs = databaseDriver.getOneClient(userHandle);
         try {
-            CheckingAccount checkingAccount = getCheckingAccount(userHandle);
-            SavingsAccount savingsAccount = getSavingsAccount(userHandle);
+            CheckingAccount checkingAccount = getCheckingAccountREMOVELATER(userHandle);
+            SavingsAccount savingsAccount = getSavingsAccountREMOVELATER(userHandle);
             String firstname = rs.getString("firstname");
             String lastname = rs.getString("lastname");
             System.out.println(rs.getString("lastname"));
@@ -158,32 +167,34 @@ public class Model {
 
     // Helper Methods
 
-    public CheckingAccount getCheckingAccount(String userHandle) {
-        CheckingAccount account = null;
-        ResultSet rs = databaseDriver.getCheckingAccountData(userHandle);
-        try {
-            String accountNum = rs.getString("account_number");
-            double balance = rs.getDouble("balance");
-            int transactionLimit = rs.getInt("transaction_limit");
-            account = new CheckingAccount(userHandle, accountNum, balance, transactionLimit);
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return account;
+    public CheckingAccount getCheckingAccountREMOVELATER(String userHandle) {
+//        CheckingAccount account = null;
+//        ResultSet rs = databaseDriver.getCheckingAccountData(userHandle);
+//        try {
+//            String accountNum = rs.getString("account_number");
+//            double balance = rs.getDouble("balance");
+//            int transactionLimit = rs.getInt("transaction_limit");
+//            account = new CheckingAccount(userHandle, accountNum, balance, transactionLimit);
+//        } catch (SQLException e) {
+//            e.printStackTrace();
+//        }
+//        return account;
+        return databaseDriver.getCheckingAccount(userHandle);
     }
 
-    public SavingsAccount getSavingsAccount(String userHandle) {
-        SavingsAccount account = null;
-        ResultSet rs = databaseDriver.getSavingsAccountData(userHandle);
-        try {
-            String accountNum = rs.getString("account_number");
-            double balance = rs.getDouble("balance");
-            int withdrawalLimit = rs.getInt("withdrawal_limit");
-            account = new SavingsAccount(userHandle, accountNum, balance, withdrawalLimit);
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return account;
+    public SavingsAccount getSavingsAccountREMOVELATER(String userHandle) {
+//        SavingsAccount account = null;
+//        ResultSet rs = databaseDriver.getSavingsAccountData(userHandle);
+//        try {
+//            String accountNum = rs.getString("account_number");
+//            double balance = rs.getDouble("balance");
+//            int withdrawalLimit = rs.getInt("withdrawal_limit");
+//            account = new SavingsAccount(userHandle, accountNum, balance, withdrawalLimit);
+//        } catch (SQLException e) {
+//            e.printStackTrace();
+//        }
+//        return account;
+        return databaseDriver.getSavingsAccount(userHandle);
     }
 
 
