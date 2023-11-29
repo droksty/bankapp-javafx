@@ -64,62 +64,58 @@ public class DatabaseDriver {
         return false;
     }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    public void createClient(String firstname, String lastname, String username, String password, LocalDate date) {
-        Statement statement;
-        try {
-            statement = this.connection.createStatement();
-            statement.executeUpdate("INSERT INTO " +
-                    "client (firstname, lastname, user_handle, password, date) " +
-                    "VALUES ('"+firstname+"', '"+lastname+"', '"+username+"', '"+password+"', '"+date.toString()+"');");
+    public void insertClient(String firstname, String lastname, String userHandle, String password, LocalDate date) {
+        String sql = "INSERT INTO client (firstname, lastname, user_handle, password, date) VALUES (?, ?, ?, ?, ?)";
+        try (PreparedStatement ps = connection.prepareStatement(sql)) {
+            ps.setString(1, firstname);
+            ps.setString(2, lastname);
+            ps.setString(3, userHandle);
+            ps.setString(4, password);
+            ps.setString(5, date.toString());
+            ps.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
         }
     }
 
-    public void createCheckingAccount(String owner, String number, double transactionLimit, double balance) {
-        Statement statement;
-        try {
-            statement = this.connection.createStatement();
-            statement.executeUpdate("INSERT INTO " +
-                    "checking_account (owner, account_number, transaction_limit, balance) " +
-                    "VALUES ('"+owner+"', '"+number+"', '"+transactionLimit+"', '"+balance+"')");
+    public void insertCheckingAccount(String owner, String number, int transactionLimit, double balance) {
+        String sql = "INSERT INTO checking_account (owner, account_number, transaction_limit, balance) VALUES (?, ?, ?, ?)";
+        try (PreparedStatement ps = connection.prepareStatement(sql)) {
+            ps.setString(1, owner);
+            ps.setString(2, number);
+            ps.setInt(3, transactionLimit);
+            ps.setDouble(4, balance);
+            ps.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
         }
     }
 
-    public void createSavingsAccount(String owner, String number, double withdrawalLimit, double balance) {
-        Statement statement;
-        try {
-            statement = this.connection.createStatement();
-            statement.executeUpdate("INSERT INTO " +
-                    "savings_account (owner, account_number, withdrawal_limit, balance) " +
-                    "VALUES ('"+owner+"', '"+number+"', '"+withdrawalLimit+"', '"+balance+"')");
+    public void insertSavingsAccount(String owner, String number, double withdrawalLimit, double balance) {
+        String sql = "INSERT INTO savings_account (owner, account_number, withdrawal_limit, balance) VALUES (?, ?, ?, ?)";
+        try (PreparedStatement ps = connection.prepareStatement(sql)) {
+            ps.setString(1, owner);
+            ps.setString(2, number);
+            ps.setDouble(3, withdrawalLimit);
+            ps.setDouble(4, balance);
+            ps.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
         }
     }
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     public ResultSet getAllClients() {
         Statement statement;

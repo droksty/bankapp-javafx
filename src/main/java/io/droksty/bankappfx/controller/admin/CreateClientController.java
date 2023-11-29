@@ -37,14 +37,13 @@ public class CreateClientController {
 
 
     private void createClient() {
-        createAccount("checking");
-        createAccount("savings");
-
         String firstname = firstnameField.getText();
         String lastname = lastnameField.getText();
         String password = passwordField.getText();
-        Model.getInstance().getDatabaseDriver().createClient(firstname, lastname, userHandle, password, LocalDate.now());
+        Model.getInstance().getDatabaseDriver().insertClient(firstname, lastname, userHandle, password, LocalDate.now());
 
+        createAccount("checking");
+        createAccount("savings");
         messageLabel.setText("Client created");
         clearForm();
     }
@@ -55,10 +54,10 @@ public class CreateClientController {
         String accountNum = firstSection + " " + lastSection;
         if (accountType.equals("checking")) {
             double balance = Double.parseDouble(checkingBalanceField.getText());
-            Model.getInstance().getDatabaseDriver().createCheckingAccount(userHandle, accountNum, 10, balance);
+            Model.getInstance().getDatabaseDriver().insertCheckingAccount(userHandle, accountNum, 10, balance);
         } else {
             double balance = Double.parseDouble(savingsBalanceField.getText());
-            Model.getInstance().getDatabaseDriver().createSavingsAccount(userHandle, accountNum, 2000, balance);
+            Model.getInstance().getDatabaseDriver().insertSavingsAccount(userHandle, accountNum, 2000, balance);
         }
     }
 
