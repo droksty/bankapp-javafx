@@ -42,38 +42,59 @@ public class DatabaseDriver {
         return rs;
     }
 
-    /*
-    * Admin Section
-    * */
-    public ResultSet getAdminData(String username, String password) {
-        Statement statement;
-        ResultSet rs = null;
-        try {
-            statement = this.connection.createStatement();
-            rs = statement.executeQuery("SELECT  * FROM admin WHERE username='"+username+"' AND password='"+password+"';");
+
+
+
+    /*                                                  */
+    /*                  Admin DAO Section               */
+    /*                                                  */
+
+    public boolean adminExists(String username, String password) {
+        String sql = "SELECT  * FROM admin WHERE username=? AND password=?";
+        try (PreparedStatement ps = connection.prepareStatement(sql)) {
+            ps.setString(1, username);
+            ps.setString(2, password);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                return true;
+            }
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return rs;
+        return false;
     }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     public void createClient(String firstname, String lastname, String username, String password, LocalDate date) {
         Statement statement;
-//        int KEY = -1;
         try {
             statement = this.connection.createStatement();
             statement.executeUpdate("INSERT INTO " +
                     "client (firstname, lastname, user_handle, password, date) " +
-                    "VALUES ('"+firstname+"', '"+lastname+"', '"+username+"', '"+password+"', '"+date.toString()+"');", Statement.RETURN_GENERATED_KEYS);
-            /*ResultSet set = statement.getGeneratedKeys();
-            if (set.isBeforeFirst()) {
-                KEY = set.getInt(1);
-                System.out.println(KEY);
-            }*/
+                    "VALUES ('"+firstname+"', '"+lastname+"', '"+username+"', '"+password+"', '"+date.toString()+"');");
         } catch (SQLException e) {
             e.printStackTrace();
         }
-//        return KEY;
     }
 
     public void createCheckingAccount(String owner, String number, double transactionLimit, double balance) {

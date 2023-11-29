@@ -29,7 +29,7 @@ public class LoginController {
 
     private void login() {
         if (adminLogin.selectedProperty().get()) {
-            if (Model.getInstance().isAdminLoginAuthorised(usernameField.getText(), passwordField.getText())) {
+            if (Model.getInstance().authenticateAdmin(usernameField.getText(), passwordField.getText())) {
                 ViewFactory.showAdminWindow();
                 ViewFactory.closeStage((Stage) errorLabel.getScene().getWindow());
             } else {

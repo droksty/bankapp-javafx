@@ -107,16 +107,8 @@ public class Model {
     * Admin section
     */
 
-    public boolean isAdminLoginAuthorised(String username, String password) {
-        ResultSet rs = databaseDriver.getAdminData(username, password);
-        try {
-            if (rs.isBeforeFirst()) {
-                return true;
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return false;
+    public boolean authenticateAdmin(String username, String password) {
+        return databaseDriver.adminExists(username, password);
     }
 
 
