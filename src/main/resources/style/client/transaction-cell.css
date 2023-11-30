@@ -19,6 +19,18 @@
     -fx-font-weight: 700;
 }
 
+.message-button {
+    -fx-background-color: #fff;
+}
+
+.message-button FontAwesomeIconView {
+    -fx-fill: #D9CE52;
+}
+
+.message-button:hover {
+    -fx-cursor: hand;
+}
+
 .amount-label {
     -fx-background-color: #D9CE52;
     -fx-background-radius: 2;

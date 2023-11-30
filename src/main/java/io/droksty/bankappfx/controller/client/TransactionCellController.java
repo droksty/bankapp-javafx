@@ -4,6 +4,7 @@ import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
 import io.droksty.bankappfx.model.Model;
 import io.droksty.bankappfx.model.transaction.Transaction;
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.paint.Color;
 
@@ -18,6 +19,8 @@ public class TransactionCellController {
     private Label senderLabel;
     @FXML
     private Label receiverLabel;
+    @FXML
+    private Button messageButton;
     @FXML
     private Label amountLabel;
 
