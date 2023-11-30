@@ -93,16 +93,31 @@ public class DatabaseDriver {
         return client;
     }
 
-
-
-
+    
     // Transaction DAO
+
+    public void insertTransaction(String sender, String receiver, double amount, String message) {
+        String sql = "INSERT INTO transactions (sender, receiver, amount, date, message) VALUES (?, ?, ?, ?, ?)";
+        LocalDate currentDate = LocalDate.now();
+        System.out.println(currentDate);
+        try (PreparedStatement ps = connection.prepareStatement(sql)) {
+            ps.setString(1, sender);
+            ps.setString(2, receiver);
+            ps.setDouble(3, amount);
+            ps.setString(4, currentDate.toString());
+            ps.setString(5, message);
+            ps.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
     public ResultSet getTransactions(String userHandle, int limit) {
         Statement statement;
         ResultSet rs = null;
         try {
             statement = this.connection.createStatement();
-            rs = statement.executeQuery("SELECT * FROM transaction WHERE sender='"+userHandle+"' OR receiver='"+userHandle+"' LIMIT "+limit+"");
+            rs = statement.executeQuery("SELECT * FROM transactions WHERE sender='"+userHandle+"' OR receiver='"+userHandle+"' LIMIT "+limit+"");
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -160,10 +175,12 @@ public class DatabaseDriver {
         }
     }
 
-    public void updateSavingsAccBalance(String userHandle, double amount) {
+    public void updateSavingsAccountBalance(String userHandle, double amount) {
         String sql = "UPDATE savings_account SET balance=? WHERE owner=?";
+        double newBalance = getSavingsAccountBalance(userHandle) + amount;
+        if (newBalance < 0) return;
         try (PreparedStatement ps = connection.prepareStatement(sql)) {
-            ps.setDouble(1, amount);
+            ps.setDouble(1, newBalance);
             ps.setString(2, userHandle);
             ps.executeUpdate();
         } catch (SQLException e) {
@@ -201,6 +218,19 @@ public class DatabaseDriver {
             e.printStackTrace();
         }
         return account;
+    }
+
+    public double getSavingsAccountBalance(String userHandle) {
+        double balance = 0;
+        String sql = "SELECT * FROM savings_account WHERE owner=?";
+        try (PreparedStatement ps = connection.prepareStatement(sql)) {
+            ps.setString(1, userHandle);
+            ResultSet rs = ps.executeQuery();
+            balance = rs.getDouble("balance");
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return balance;
     }
 
 

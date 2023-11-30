@@ -40,9 +40,9 @@ public class DepositController {
 
     private void onDeposit() {
         double amount = Double.parseDouble(amountField.getText());
-        double newBalance = amount + client.savingsAccountProperty().get().balanceProperty().get();
+//        double newBalance = amount + client.savingsAccountProperty().get().balanceProperty().get();
         if (amountField.getText() != null) {
-            Model.getInstance().getDatabaseDriver().updateSavingsAccBalance(client.userHandleProperty().get(), newBalance);
+            Model.getInstance().getDatabaseDriver().updateSavingsAccountBalance(client.userHandleProperty().get(), amount);
         }
         clearFields();
     }
