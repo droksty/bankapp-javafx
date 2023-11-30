@@ -32,6 +32,7 @@ public class DashboardController {
         transactionsListView.setItems(Model.getInstance().getLatestTransactions());
         transactionsListView.setCellFactory(e -> new TransactionCellFactory());
         sendButton.setOnAction(event -> onSendMoney());
+        calculateAccountSummary();
     }
 
     private void bind() {
@@ -65,5 +66,22 @@ public class DashboardController {
         receiverField.setText("");
         amountField.setText("");
         messageField.setText("");
+    }
+
+
+    private void calculateAccountSummary() {
+        double income = 0, expenses = 0;
+        if (Model.getInstance().getAllTransactions().isEmpty()) {
+            Model.getInstance().setAllTransactions();
+        }
+        for (Transaction transaction : Model.getInstance().getAllTransactions()) {
+            if (transaction.senderProperty().get().equals(Model.getInstance().getClient().userHandleProperty().get())) {
+                expenses += transaction.amountProperty().get();
+            } else {
+                income += transaction.amountProperty().get();
+            }
+        }
+        incomeLabel.setText("+ €" + income);
+        expensesLabel.setText("+ €" + expenses);
     }
 }
