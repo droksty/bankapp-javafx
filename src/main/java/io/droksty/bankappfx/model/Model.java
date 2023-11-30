@@ -70,10 +70,6 @@ public class Model {
     }
 
 
-
-
-
-
     // Service Layer ?
 
     public boolean authenticateClient(String userHandle, String password) {
@@ -88,27 +84,9 @@ public class Model {
         return databaseDriver.getOneClient(userHandle);
     }
 
-
-
-
-
-
-
     private void prepareTransactions(ObservableList<Transaction> transactions, int limit) {
-        ResultSet resultSet = databaseDriver.getTransactions(this.client.userHandleProperty().get(), limit);
-        if (resultSet == null) return; // What if there is no transaction history Patrick?
-        try {
-            while (resultSet.next()) {
-                String sender = resultSet.getString("sender");
-                String receiver = resultSet.getString("receiver");
-                double amount = resultSet.getDouble("amount");
-                LocalDate date = getDateFromResultSet(resultSet.getString("date"));
-                String message = resultSet.getString("message");
-                transactions.add(new Transaction(sender, receiver, amount, date, message));
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+        List<Transaction> transactionList = databaseDriver.getTransactions(this.client.userHandleProperty().get(), limit);
+        transactions.addAll(transactionList);
     }
 
     public void setLatestTransactions() {
@@ -126,27 +104,4 @@ public class Model {
     public ObservableList<Transaction> getAllTransactions() {
         return allTransactions;
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    // Helper Methods
-
-    private LocalDate getDateFromResultSet(String date) {
-        String[] dateParts = date.split("-");
-        return LocalDate.of(Integer.parseInt(dateParts[0]), Integer.parseInt(dateParts[1]), Integer.parseInt(dateParts[2]));
-    }
-
 }

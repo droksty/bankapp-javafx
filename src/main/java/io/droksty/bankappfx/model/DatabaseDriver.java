@@ -4,6 +4,7 @@ import io.droksty.bankappfx.model.account.Account;
 import io.droksty.bankappfx.model.account.CheckingAccount;
 import io.droksty.bankappfx.model.account.SavingsAccount;
 import io.droksty.bankappfx.model.client.Client;
+import io.droksty.bankappfx.model.transaction.Transaction;
 
 import java.sql.*;
 import java.time.LocalDate;
@@ -94,12 +95,13 @@ public class DatabaseDriver {
     }
 
 
-    // Transaction DAO
+    /*                                                  */
+    /*              Transaction DAO Section             */
+    /*                                                  */
 
     public void insertTransaction(String sender, String receiver, double amount, String message) {
         String sql = "INSERT INTO transactions (sender, receiver, amount, date, message) VALUES (?, ?, ?, ?, ?)";
         LocalDate currentDate = LocalDate.now();
-        System.out.println(currentDate);
         try (PreparedStatement ps = connection.prepareStatement(sql)) {
             ps.setString(1, sender);
             ps.setString(2, receiver);
@@ -112,16 +114,26 @@ public class DatabaseDriver {
         }
     }
 
-    public ResultSet getTransactions(String userHandle, int limit) {
-        Statement statement;
-        ResultSet rs = null;
-        try {
-            statement = this.connection.createStatement();
-            rs = statement.executeQuery("SELECT * FROM transactions WHERE sender='"+userHandle+"' OR receiver='"+userHandle+"' LIMIT "+limit+"");
+    public List<Transaction> getTransactions(String userHandle, int limit) {
+        String sql = "SELECT * FROM transactions WHERE sender=? OR receiver=? LIMIT ?";
+        List<Transaction> transactionList = new ArrayList<>();
+        try (PreparedStatement ps = connection.prepareStatement(sql)) {
+            ps.setString(1, userHandle);
+            ps.setString(2, userHandle);
+            ps.setInt(3, limit);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                String sender = rs.getString("sender");
+                String receiver = rs.getString("receiver");
+                double amount = rs.getDouble("amount");
+                LocalDate date = getDateFromResultSet(rs.getString("date"));
+                String message = rs.getString("message");
+                transactionList.add(new Transaction(sender, receiver, amount, date, message));
+            }
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return rs;
+        return transactionList;
     }
 
 
