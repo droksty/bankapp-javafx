@@ -5,13 +5,10 @@ import io.droksty.bankappfx.model.transaction.Transaction;
 import io.droksty.bankappfx.view.TransactionCellFactory;
 import javafx.beans.binding.Bindings;
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.text.Text;
 
-import java.net.URL;
 import java.time.LocalDate;
-import java.util.ResourceBundle;
 
 public class DashboardController {
     public Text userGreetingText;
@@ -23,7 +20,7 @@ public class DashboardController {
     public Label incomeLabel;
     public Label expensesLabel;
     public ListView<Transaction> transactionsListView;
-    public TextField payeeField;
+    public TextField receiverField;
     public TextField amountField;
     public TextArea messageField;
     public Button sendButton;
@@ -34,6 +31,7 @@ public class DashboardController {
         initializeLatestTransactions();
         transactionsListView.setItems(Model.getInstance().getLatestTransactions());
         transactionsListView.setCellFactory(e -> new TransactionCellFactory());
+        sendButton.setOnAction(event -> onSendMoney());
     }
 
     private void bind() {
@@ -48,5 +46,24 @@ public class DashboardController {
         if (Model.getInstance().getLatestTransactions().isEmpty()) {
             Model.getInstance().setLatestTransactions();
         }
+    }
+
+    private void onSendMoney() {
+        String receiver = receiverField.getText();
+        double amount = Double.parseDouble(amountField.getText());
+        String message = messageField.getText();
+        String sender = Model.getInstance().getClient().userHandleProperty().get();
+
+        Model.getInstance().getDatabaseDriver().updateSavingsAccountBalance(receiver, amount);
+        Model.getInstance().getDatabaseDriver().updateSavingsAccountBalance(sender, -amount);
+
+        double newBalance = Model.getInstance().getDatabaseDriver().getSavingsAccountBalance(sender);
+        Model.getInstance().getClient().savingsAccountProperty().get().balanceProperty().set(newBalance);
+
+        Model.getInstance().getDatabaseDriver().insertTransaction(sender, receiver, amount, message);
+
+        receiverField.setText("");
+        amountField.setText("");
+        messageField.setText("");
     }
 }

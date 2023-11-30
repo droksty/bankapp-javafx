@@ -63,7 +63,7 @@
    <ListView fx:id="transactionsListView" prefHeight="365.0" prefWidth="570.0" styleClass="transactions" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="20.0" />
    <VBox prefHeight="365.0" prefWidth="210.0" styleClass="send-money" AnchorPane.bottomAnchor="20.0" AnchorPane.rightAnchor="20.0">
       <Label text="Payee Address" />
-      <TextField fx:id="payeeField" />
+      <TextField fx:id="receiverField" />
       <Label text="Amount in €:" />
       <TextField fx:id="amountField" />
       <Label text="Message (optional):" />

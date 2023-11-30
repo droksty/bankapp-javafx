@@ -93,7 +93,7 @@ public class DatabaseDriver {
         return client;
     }
 
-    
+
     // Transaction DAO
 
     public void insertTransaction(String sender, String receiver, double amount, String message) {
