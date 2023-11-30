@@ -22,44 +22,14 @@ public class DatabaseDriver {
     }
 
 
-    /*
-    * Client Section
-    * */
-    public ResultSet getClientData(String userHandle, String password) {
-        Statement statement;
-        ResultSet rs = null;
-        try {
-            statement = this.connection.createStatement();
-            rs = statement.executeQuery("SELECT  * FROM client WHERE user_handle='"+userHandle+"' AND password='"+password+"';");
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return rs;
-    }
-
-    public ResultSet getTransactions(String userHandle, int limit) {
-        Statement statement;
-        ResultSet rs = null;
-        try {
-            statement = this.connection.createStatement();
-            rs = statement.executeQuery("SELECT * FROM transaction WHERE sender='"+userHandle+"' OR receiver='"+userHandle+"' LIMIT "+limit+"");
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return rs;
-    }
-
-
-
-
     /*                                                  */
-    /*                  Admin DAO Section               */
+    /*                  Client DAO Section              */
     /*                                                  */
 
-    public boolean adminExists(String username, String password) {
-        String sql = "SELECT  * FROM admin WHERE username=? AND password=?";
+    public boolean clientExists(String userHandle, String password) {
+        String sql = "SELECT  * FROM client WHERE user_handle=? AND password=?";
         try (PreparedStatement ps = connection.prepareStatement(sql)) {
-            ps.setString(1, username);
+            ps.setString(1, userHandle);
             ps.setString(2, password);
             ResultSet rs = ps.executeQuery();
             if (rs.next()) {
@@ -84,6 +54,85 @@ public class DatabaseDriver {
             e.printStackTrace();
         }
     }
+
+    public List<Client> getAllClients() {
+        List<Client> clientList = new ArrayList<>();
+        String sql = "SELECT * FROM client";
+        try (PreparedStatement ps = connection.prepareStatement(sql)) {
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                String firstname = rs.getString("firstname");
+                String lastname = rs.getString("lastname");
+                String userHandle = rs.getString("user_handle");
+                LocalDate date = getDateFromResultSet(rs.getString("date"));
+                Account checkingAccount = getCheckingAccount(userHandle);
+                Account savingsAccount = getSavingsAccount(userHandle);
+                clientList.add(new Client(firstname, lastname, userHandle, checkingAccount, savingsAccount, date));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return clientList;
+    }
+
+    public Client getOneClient(String userHandle) {
+        Client client = new Client();
+        String sql = "SELECT * FROM client WHERE user_handle=?";
+        try (PreparedStatement ps = connection.prepareStatement(sql)) {
+            ps.setString(1, userHandle);
+            ResultSet rs = ps.executeQuery();
+            client.firstnameProperty().set(rs.getString("firstname"));
+            client.firstnameProperty().set(rs.getString("lastname"));
+            client.userHandleProperty().set(userHandle);
+            client.checkingAccountProperty().set(getCheckingAccount(userHandle));
+            client.savingsAccountProperty().set(getSavingsAccount(userHandle));
+            client.dateCreatedProperty().set(getDateFromResultSet(rs.getString("date")));
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return client;
+    }
+
+
+
+
+    // Transaction DAO
+    public ResultSet getTransactions(String userHandle, int limit) {
+        Statement statement;
+        ResultSet rs = null;
+        try {
+            statement = this.connection.createStatement();
+            rs = statement.executeQuery("SELECT * FROM transaction WHERE sender='"+userHandle+"' OR receiver='"+userHandle+"' LIMIT "+limit+"");
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return rs;
+    }
+
+
+    /*                                                  */
+    /*                  Admin DAO Section               */
+    /*                                                  */
+
+    public boolean adminExists(String username, String password) {
+        String sql = "SELECT  * FROM admin WHERE username=? AND password=?";
+        try (PreparedStatement ps = connection.prepareStatement(sql)) {
+            ps.setString(1, username);
+            ps.setString(2, password);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                return true;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
+
+    /*                                                  */
+    /*                 Account DAO Section              */
+    /*                                                  */
 
     public void insertCheckingAccount(String owner, String number, int transactionLimit, double balance) {
         String sql = "INSERT INTO checking_account (owner, account_number, transaction_limit, balance) VALUES (?, ?, ?, ?)";
@@ -111,44 +160,6 @@ public class DatabaseDriver {
         }
     }
 
-    public List<Client> getAllClients() {
-        List<Client> clientList = new ArrayList<>();
-        String sql = "SELECT * FROM client";
-        try (PreparedStatement ps = connection.prepareStatement(sql)) {
-            ResultSet rs = ps.executeQuery();
-            while (rs.next()) {
-                String firstname = rs.getString("firstname");
-                String lastname = rs.getString("lastname");
-                String userHandle = rs.getString("user_handle");
-                LocalDate date = getDateFromResultSet(rs.getString("date"));
-                Account checkingAccount = getCheckingAccount(userHandle);
-                Account savingsAccount = getSavingsAccount(userHandle);
-                clientList.add(new Client(firstname, lastname, userHandle, checkingAccount, savingsAccount, date));
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return clientList;
-    }
-
-    public List<Client> getOneClient(String userHandle) {
-        List<Client> clientList = new ArrayList<>();
-        String sql = "SELECT * FROM client WHERE user_handle=?";
-        try (PreparedStatement ps = connection.prepareStatement(sql)) {
-            ps.setString(1, userHandle);
-            ResultSet rs = ps.executeQuery();
-            String firstname = rs.getString("firstname");
-            String lastname = rs.getString("lastname");
-            LocalDate date = getDateFromResultSet(rs.getString("date"));
-            Account checkingAccount = getCheckingAccount(userHandle);
-            Account savingsAccount = getSavingsAccount(userHandle);
-            clientList.add(new Client(firstname, lastname, userHandle, checkingAccount, savingsAccount, date));
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return clientList;
-    }
-
     public void updateSavingsAccBalance(String userHandle, double amount) {
         String sql = "UPDATE savings_account SET balance=? WHERE owner=?";
         try (PreparedStatement ps = connection.prepareStatement(sql)) {
@@ -159,17 +170,6 @@ public class DatabaseDriver {
             e.printStackTrace();
         }
     }
-
-
-
-
-
-
-
-
-    /*                                                  */
-    /*                 Account DAO Section              */
-    /*                                                  */
 
     public CheckingAccount getCheckingAccount(String userHandle) {
         CheckingAccount account = null;
@@ -204,9 +204,10 @@ public class DatabaseDriver {
     }
 
 
-    /*
-    * Utility Methods
-    * */
+    /*                                                  */
+    /*                 Helper Methods                   */
+    /*                                                  */
+
     public int getLastClientID() {
         Statement statement;
         ResultSet resultSet;
@@ -220,15 +221,6 @@ public class DatabaseDriver {
         }
         return id;
     }
-
-
-
-
-
-
-
-
-
 
 
     private LocalDate getDateFromResultSet(String date) {

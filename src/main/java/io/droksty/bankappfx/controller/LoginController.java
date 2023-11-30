@@ -37,9 +37,8 @@ public class LoginController {
                 errorLabel.setText("Wrong Credentials");
             }
         } else {
-            if (Model.getInstance().isClientLoginAuthorised(usernameField.getText(), passwordField.getText())) {
-                System.out.println(usernameField.getText());
-                System.out.println(passwordField.getText());
+            if (Model.getInstance().authenticateClient(usernameField.getText(), passwordField.getText())) {
+                Model.getInstance().setClient(usernameField.getText());
                 ViewFactory.showClientWindow();
                 ViewFactory.closeStage((Stage) errorLabel.getScene().getWindow());
             } else {

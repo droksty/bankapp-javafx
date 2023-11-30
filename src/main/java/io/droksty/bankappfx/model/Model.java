@@ -16,16 +16,16 @@ public class Model {
     private static Model model;
     private final DatabaseDriver databaseDriver;
     private final Client client;
+    private final ObservableList<Client> clientList;
     private final ObservableList<Transaction> latestTransactions;
     private final ObservableList<Transaction> allTransactions;
-    private final ObservableList<Client> clientList;
 
     private Model() {
         this.databaseDriver = new DatabaseDriver();
-        this.client = new Client("", "", "", null, null, null);
+        this.client = new Client();
+        this.clientList = FXCollections.observableArrayList();
         this.latestTransactions = FXCollections.observableArrayList();
         this.allTransactions = FXCollections.observableArrayList();
-        this.clientList = FXCollections.observableArrayList();
     }
 
     public static synchronized Model getInstance() {
@@ -40,47 +40,58 @@ public class Model {
     }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-    /*
-    * Client Section
-    */
+    /*                                                  */
+    /*                                                  */
+    /*                                                  */
 
     public Client getClient() {
         return client;
     }
 
-    public boolean isClientLoginAuthorised(String userHandle, String password) {
-        CheckingAccount checkingAccount;
-        SavingsAccount savingsAccount;
-        ResultSet rs = databaseDriver.getClientData(userHandle, password);
-        try {
-            if (rs.isBeforeFirst()) {
-                this.client.firstnameProperty().set(rs.getString("firstname"));
-                this.client.lastnameProperty().set(rs.getString("lastname"));
-                this.client.userHandleProperty().set(rs.getString("user_handle"));
-                this.client.dateCreatedProperty().set(getDateFromResultSet(rs.getString("date")));
-                checkingAccount = getCheckingAccountREMOVELATER(userHandle);
-                savingsAccount = getSavingsAccountREMOVELATER(userHandle);
-                this.client.checkingAccountProperty().set(checkingAccount);
-                this.client.savingsAccountProperty().set(savingsAccount);
-                return true;
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return false;
+    public void setClient(String userHandle) {
+        Client client = databaseDriver.getOneClient(userHandle);
+        this.client.firstnameProperty().set(client.firstnameProperty().getValue());
+        this.client.lastnameProperty().set(client.lastnameProperty().getValue());
+        this.client.userHandleProperty().set(client.userHandleProperty().getValue());
+        this.client.dateCreatedProperty().set(client.dateCreatedProperty().getValue());
+        CheckingAccount checkingAccount = databaseDriver.getCheckingAccount(userHandle);
+        SavingsAccount savingsAccount = databaseDriver.getSavingsAccount(userHandle);
+        this.client.checkingAccountProperty().set(checkingAccount);
+        this.client.savingsAccountProperty().set(savingsAccount);
     }
+
+    public ObservableList<Client> getClientList() {
+        return clientList;
+    }
+
+    public void setClientList() {
+        List<Client> list = databaseDriver.getAllClients();
+        clientList.addAll(list);
+    }
+
+
+
+
+
+
+    // Service Layer ?
+
+    public boolean authenticateClient(String userHandle, String password) {
+        return databaseDriver.clientExists(userHandle, password);
+    }
+
+    public boolean authenticateAdmin(String username, String password) {
+        return databaseDriver.adminExists(username, password);
+    }
+
+    public Client searchOne(String userHandle) {
+        return databaseDriver.getOneClient(userHandle);
+    }
+
+
+
+
+
 
 
     private void prepareTransactions(ObservableList<Transaction> transactions, int limit) {
@@ -99,7 +110,6 @@ public class Model {
             e.printStackTrace();
         }
     }
-
 
     public void setLatestTransactions() {
         prepareTransactions(this.latestTransactions, 4);
@@ -126,66 +136,13 @@ public class Model {
 
 
 
-    /*
-    * Admin section
-    */
-    /**/
 
-    public boolean authenticateAdmin(String username, String password) {
-        return databaseDriver.adminExists(username, password);
-    }
 
-    public ObservableList<Client> getClientList() {
-        return clientList;
-    }
-
-    public void setClientList() {
-        List<Client> list = databaseDriver.getAllClients();
-        clientList.addAll(list);
-    }
-
-    public ObservableList<Client> searchOne(String userHandle) {
-        List<Client> list = databaseDriver.getOneClient(userHandle);
-        return FXCollections.observableArrayList(list);
-    }
 
 
 
 
     // Helper Methods
-
-    public CheckingAccount getCheckingAccountREMOVELATER(String userHandle) {
-//        CheckingAccount account = null;
-//        ResultSet rs = databaseDriver.getCheckingAccountData(userHandle);
-//        try {
-//            String accountNum = rs.getString("account_number");
-//            double balance = rs.getDouble("balance");
-//            int transactionLimit = rs.getInt("transaction_limit");
-//            account = new CheckingAccount(userHandle, accountNum, balance, transactionLimit);
-//        } catch (SQLException e) {
-//            e.printStackTrace();
-//        }
-//        return account;
-        return databaseDriver.getCheckingAccount(userHandle);
-    }
-
-    public SavingsAccount getSavingsAccountREMOVELATER(String userHandle) {
-//        SavingsAccount account = null;
-//        ResultSet rs = databaseDriver.getSavingsAccountData(userHandle);
-//        try {
-//            String accountNum = rs.getString("account_number");
-//            double balance = rs.getDouble("balance");
-//            int withdrawalLimit = rs.getInt("withdrawal_limit");
-//            account = new SavingsAccount(userHandle, accountNum, balance, withdrawalLimit);
-//        } catch (SQLException e) {
-//            e.printStackTrace();
-//        }
-//        return account;
-        return databaseDriver.getSavingsAccount(userHandle);
-    }
-
-
-
 
     private LocalDate getDateFromResultSet(String date) {
         String[] dateParts = date.split("-");
