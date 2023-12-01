@@ -3,6 +3,7 @@ package io.droksty.bankappfx.controller.client;
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
 import io.droksty.bankappfx.model.Model;
 import io.droksty.bankappfx.model.transaction.Transaction;
+import io.droksty.bankappfx.view.ViewFactory;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -37,6 +38,7 @@ public class TransactionCellController {
         amountLabel.textProperty().bind(transaction.amountProperty().asString());
         datetimeLabel.textProperty().bind(transaction.dateProperty().asString());
         setTransactionIcons();
+        messageButton.setOnAction(event -> ViewFactory.showMessageWindow(transaction.senderProperty().get(), transaction.messageProperty().get()));
     }
 
     private void setTransactionIcons() {

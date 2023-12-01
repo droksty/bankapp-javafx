@@ -4,9 +4,14 @@ import io.droksty.bankappfx.controller.client.ClientController;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Pos;
 import javafx.scene.Scene;
+import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.StackPane;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -119,6 +124,24 @@ public final class ViewFactory {
     public static void showAdminWindow() {
         FXMLLoader loader = new FXMLLoader(ViewFactory.class.getResource("/fxml/admin/Admin.fxml"));
         createStage(loader);
+    }
+
+    public static void showMessageWindow(String sender, String message) {
+        StackPane pane = new StackPane();
+        HBox hBox = new HBox(5);
+        hBox.setAlignment(Pos.CENTER);
+        Label senderLabel = new Label(sender);
+        Label messageLabel = new Label(message);
+        hBox.getChildren().addAll(senderLabel, messageLabel);
+        pane.getChildren().add(hBox);
+        Scene scene = new Scene(pane, 400, 100);
+        Stage stage = new Stage();
+        stage.getIcons().add(icon);
+        stage.setResizable(false);
+        stage.initModality(Modality.APPLICATION_MODAL);
+        stage.setTitle("Message");
+        stage.setScene(scene);
+        stage.show();
     }
 
     public static void closeStage(Stage stage) {
